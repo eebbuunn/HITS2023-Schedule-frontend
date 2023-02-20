@@ -1,0 +1,29 @@
+body{
+    color: #00615D;
+}
+
+.btn{
+    background-color: #00615D;
+}
+
+.btn:hover{
+    background-color: #01776e;
+}
+
+.navbar{
+    background: #003b39;
+}
+
+.nav-logo{
+    width: 10vh;
+}
+
+.navbar-brand{
+    font-family: 'Kameron', sans-serif;
+    font-size: 28px;
+}
+
+.form-control{
+    border: 2px solid #00615D;
+    color: #00615D;
+}
