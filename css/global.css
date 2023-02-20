@@ -1,0 +1,33 @@
+:root {
+  --navbar-bg-color: #003b39;
+  --main-color: #00615d;
+  --btn-hover-color: #01776e;
+}
+body {
+  color: var(--main-color);
+}
+.btn {
+  background-color: var(--main-color);
+}
+
+.btn:hover {
+  background-color: var(--btn-hover-color);
+}
+.btn:active {
+  background: white !important;
+  border: 2px var(--main-color) solid !important;
+  color: var(--main-color) !important;
+}
+
+.navbar {
+  background: var(--navbar-bg-color);
+}
+
+.nav-logo {
+  width: 10vh;
+}
+
+.navbar-brand {
+  font-family: 'Kameron', sans-serif;
+  font-size: 28px;
+}
