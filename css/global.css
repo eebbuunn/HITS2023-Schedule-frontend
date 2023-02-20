@@ -5,6 +5,7 @@
 }
 body {
   color: var(--main-color);
+  margin: 0;
 }
 .btn {
   background-color: var(--main-color);
@@ -21,10 +22,13 @@ body {
 
 .navbar {
   background: var(--navbar-bg-color);
+  padding: 0;
 }
 
 .nav-logo {
   width: 10vh;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .navbar-brand {
