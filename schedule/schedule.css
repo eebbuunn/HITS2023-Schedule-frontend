@@ -1,0 +1,15 @@
+tr{
+    height: 10vh;
+}
+
+thead > tr{
+    height: 4vh;
+}
+
+tr > td{
+    width: 15vh
+}
+
+.legend:hover{
+    cursor: pointer;
+}

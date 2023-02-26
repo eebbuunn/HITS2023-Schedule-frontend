@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>PurrTime</title>
+    <link rel="stylesheet" href="../styles/userStyle.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="schedule.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/colors.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kameron&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-expand navbar-dark nav-bar-unauthorized">
+    <div class="container-fluid d-flex flex-column flex-md-row align-items-start">
+        <image class="nav-logo mx-3" src="../Logos/navbarLogo.png"></image>
+        <a class="navbar-brand">PurrTime</a>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav"></div>
+        </div>
+
+        <div>
+            <div class="collapse navbar-collapse" id="ddd">
+                <div class="navbar-nav"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 bg-white rounded-2 py-2 pe-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1>Расписание ...</h1>
+            <h2 class="text-secondary">27 февраля 2023 - 4 марта 2023</h2>
+            <button type="button" class="btn btn-dark my-3 me-3">Предыдущая неделя</button>
+            <button type="button" class="btn btn-dark my-3">Слудующая неделя</button>
+        </div>
+        <div class="legend">Что означают цвета</div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th style="width: 24px;"></th>
+            <th>
+                <p class="h6">ПН</p>
+                <p class="text-secondary h6">27 февр.</p>
+            </th>
+            <th>
+                <p class="h6">ВТ</p>
+                <p class="text-secondary h6">28 февр.</p>
+            </th>
+            <th>
+                <p class=" h6">СР</p>
+                <p class=" text-secondary h6">1 мар.</p>
+            </th>
+            <th>
+                <p class=" h6">ЧТ</p>
+                <p class=" text-secondary h6">2 мар.</p>
+            </th>
+            <th>
+                <p class=" h6">ПТ</p>
+                <p class=" text-secondary h6">3 мар.</p>
+            </th>
+            <th>
+                <p class=" h6">СБ</p>
+                <p class=" text-secondary h6">4 мар.</p>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>
+                <p class="text-center h6">8:45</p>
+                <p class="text-center text-secondary h6">10:20</p>
+            </th>
+            <td>
+                <div class="card m-2 lecture_bg_color" style="width: 15vh">
+                    <div class="card-body p-2 ps-3">
+                        <h5 class="card-title fw-bold">Пара нейм</h5>
+                        <p class="card-subtitle">Место нейм</p>
+                        <h6 class="card-text">группа нейм</h6>
+                    </div>
+                </div>
+                <div class="card m-2 individual_bg_color" style="width: 15vh">
+                    <div class="card-body p-2 ps-3">
+                        <h5 class="card-title fw-bold">Пара нейм</h5>
+                        <p class="card-subtitle">Место нейм</p>
+                        <h6 class="card-text">группа нейм</h6>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="card m-2 control_bg_color" style="width: 15vh">
+                    <div class="card-body p-2 ps-3">
+                        <h5 class="card-title fw-bold">Пара нейм</h5>
+                        <p class="card-subtitle">Место нейм</p>
+                        <h6 class="card-text">группа нейм</h6>
+                    </div>
+                </div>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>
+                <p class="text-center h6">10:35</p>
+                <p class="text-center text-secondary h6">12:10</p>
+            </th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>
+                <p class="text-center h6">12:25</p>
+                <p class="text-center text-secondary h6">14:00</p>
+            </th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>
+                <p class="text-center h6">14:45</p>
+                <p class="text-center text-secondary h6">16:20</p>
+            </th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <div class="card m-2 lab_bg_color" style="width: 15vh">
+                    <div class="card-body p-2 ps-3">
+                        <h5 class="card-title fw-bold">Пара нейм</h5>
+                        <p class="card-subtitle">Место нейм</p>
+                        <h6 class="card-text">группа нейм</h6>
+                    </div>
+                </div>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>
+                <p class="text-center h6">16:35</p>
+                <p class="text-center text-secondary h6">18:10</p>
+            </th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <th>
+                <p class="text-center h6">18:25</p>
+                <p class="text-center text-secondary h6">20:00</p>
+            </th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script
+        src="https://cdn.misdeliver.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>
