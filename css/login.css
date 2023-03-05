@@ -1,0 +1,33 @@
+.boldText {
+    font-weight: bold!important;
+}
+
+#login-form {
+    margin: 20px 125px 20px 125px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.btnlogin {
+    margin-left: 20px;
+    margin-right: 5px;
+}
+
+.form-group {
+    margin: 0px 20px 20px 20px;
+}
+
+.valid #error {
+    display: none;
+}
+
+.invalid #error{
+    display: table;
+}
+
+#error {
+    margin: 0px 20px 20px 0px;
+    padding: 10px 10px 10px 10px;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+

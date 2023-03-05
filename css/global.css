@@ -34,4 +34,9 @@ body {
 .navbar-brand {
   font-family: 'Kameron', sans-serif;
   font-size: 28px;
+  margin: 0px 20px 0px 0px;
+}
+
+.nav-logo{
+  margin: 0px 10px 0px 40px;
 }
