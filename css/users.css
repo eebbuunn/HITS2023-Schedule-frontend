@@ -1,0 +1,37 @@
+.btn {
+  color: white;
+  min-width: 6rem;
+}
+.btn:hover {
+  color: white;
+}
+.btn:focus {
+  background: var(--main-color);
+  color: white;
+}
+.user-vector {
+  max-width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+}
+.card {
+  border: 1px solid var(--main-color);
+  margin: 0 10px;
+}
+.users-container {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: start;
+}
+.user-group {
+  position: relative;
+  margin-bottom: 5px;
+}
