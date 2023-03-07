@@ -41,7 +41,6 @@ async function loadUsers(roles) {
     }
     block.find('.user-role').text(roles.join(', '));
     block.removeClass('d-none');
-    console.log(block);
     if (roles.length > 0) {
       $('#users-container').append(block);
     }

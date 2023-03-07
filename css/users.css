@@ -5,6 +5,10 @@
 .btn:hover {
   color: white;
 }
+.btn:focus {
+  background: var(--main-color);
+  color: white;
+}
 .user-vector {
   max-width: 150px;
   margin-left: auto;
@@ -12,6 +16,9 @@
   display: block;
 }
 .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 5px;
 }
 .card {
@@ -23,4 +30,8 @@
   margin-right: auto;
   display: flex;
   justify-content: start;
+}
+.user-group {
+  position: relative;
+  margin-bottom: 5px;
 }
