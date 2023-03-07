@@ -17,10 +17,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Kameron&display=swap" rel="stylesheet" />
   </head>
   <body class="bg-light">
-    <nav class="navbar navbar-expand navbar-dark nav-bar-unauthorized">
-      <image class="nav-logo " src="../logos/navbarLogo.png"></image>
-      <a class="navbar-brand">PurrTime</a>
-    </nav>
+  <nav class="navbar navbar-expand navbar-dark nav-bar-unauthorized" id="navbar">
+    <image class="nav-logo mx-3" src="../logos/navbarLogo.png"></image>
+    <a class="navbar-brand">PurrTime</a>
+    <div class="navbar-nav left-side">
+      <a class="nav-link" href="/" id="users">Пользователи</a>
+      <a class="nav-link" href="/" id="groups">Группы</a>
+      <a class="nav-link" href="/" id="teachers">Преподаватели</a>
+      <a class="nav-link" href="/" id="classes">Аудитории</a>
+    </div>
+    <div class="navbar-nav ms-auto right-side">
+      <a class="nav-link"  id="nickname"></a>
+      <a class="nav-link" id="signout">&nbsp;Выйти</a>
+    </div>
+  </nav>
 
     <div class="container mt-5 bg-white rounded-2 py-1 pe-4">
       <div id="validation-fail-text" class="m-3 text-danger d-none">Логин или пароль неверны</div>
@@ -70,11 +80,16 @@
       </form>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    ></script>
     <script
       src="https://cdn.misdeliver.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"
     ></script>
-    <script src="../scripts/reg.js"></script>
+    <script type="module" src="../scripts/reg.js"></script>
   </body>
 </html>

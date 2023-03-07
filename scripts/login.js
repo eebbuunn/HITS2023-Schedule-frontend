@@ -22,7 +22,8 @@ export function setLoginButtonEvent() {
                     localStorage.setItem('userToken', json.accessToken)
                     localStorage.setItem('refreshUserToken', json.refreshToken)
                     window.location.href = '../pages/mainpage.html'
-
+                    // window.location.href = '../pages/shedule.html'
+                    // window.location.href = '../pages/reg.html'
                 }
                 else{
                     let json = await response.json();
