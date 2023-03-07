@@ -1,4 +1,4 @@
-import { get } from './requests.js';
+import {get, post} from './requests.js';
 async function loadUsers(roles) {
   $('#users-container').empty();
   let url = 'http://v1683738.hosted-by-vdsina.ru:5000/users/?';
@@ -46,7 +46,26 @@ async function loadUsers(roles) {
     }
   }
 }
+
+function navbarChek(){
+  get(`http://v1683738.hosted-by-vdsina.ru:5000/users/me`)
+      .then(profile => {
+        $("#navbar").find("#nickname").text(profile.login);
+        $("#signout").click(() => {
+          post(`http://v1683738.hosted-by-vdsina.ru:5000/auth/logout`)
+              .then(() => {
+                localStorage.setItem("userToken", "");
+                localStorage.setItem("refreshUserToken", "");
+                window.location.href = '../pages/login.html'
+              });
+        })
+        // todo добавить обработку ролей
+        localStorage.setItem("userId", profile.id);
+      })
+}
+
 $(document).ready(function () {
+  navbarChek();
   $('#findButton').click(function () {
     let roles = [];
     $('input:checkbox[name=checkbox]:checked').each(function () {
