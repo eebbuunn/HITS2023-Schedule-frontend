@@ -13,6 +13,9 @@ function navbarChek(){
   get(`http://v1683738.hosted-by-vdsina.ru:5000/users/me`)
       .then(profile => {
           $("#navbar").find("#nickname").text(profile.login);
+          if (!isUserAdmin(profile.roles)){
+              $("#users").addClass("d-none")
+          }
           $("#signout").click(() => {
               post(`http://v1683738.hosted-by-vdsina.ru:5000/auth/logout`)
                   .then(() => {
@@ -24,4 +27,13 @@ function navbarChek(){
         // todo добавить обработку ролей
         localStorage.setItem("userId", profile.id);
         })
+}
+
+function isUserAdmin(roles){
+    if (roles.includes(3 || 4)){
+        return true
+    }
+    else{
+        return false
+    }
 }
