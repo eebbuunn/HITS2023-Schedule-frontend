@@ -3,7 +3,7 @@ export function post(url, body) {
     method: 'POST',
     body: JSON.stringify(body),
     headers: new Headers({
-      Authorization: 'Bearer ' + localStorage.getItem('userToken'),
+      'Authorization': 'Bearer ' + localStorage.getItem('userToken'),
       'Content-Type': 'application/json',
     }),
   }).then((r) => {

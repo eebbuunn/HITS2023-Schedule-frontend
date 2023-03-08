@@ -1,82 +1,33 @@
 import { get, post} from "./requests.js";
 let ROLES
-let NEW_ROLES = [];
 
 $(document).ready(function () {
     navbarChek()
-    //todo: fill the teachers and groups
+    fillTeachers()
+    //todo: fill groups
 });
 
-$("#button-submit").click(function (){
-    CheckValidation();
-    let group = $('#input-group-id').val();
-    let teacher = $('#input-teacher-id').val();
-    NEW_ROLES.push(group);
-    NEW_ROLES.push(teacher);
-
-    let registerCreds = {
-        login: $("#input-login").val().trim(),
-        teacherId: $("#input-teacher-id").val().trim(),
-        groupNumber: $("#input-group-id").val().trim(),
-        password: $("#input-password").val().trim(),
-        roles: NEW_ROLES
+$("#button-register").click(function (){
+    if(CheckValidation()) {
+        let roles = $('#input-role').val()
+        roles = roles.map(Number);
+        let group = $("#input-group-id").val()
+        let teacher = $("#input-teacher-id").val()
+        group = group === "" ? null : group
+        teacher = teacher === "" ? null : teacher
+        let registerCreds = {
+            login: $("#input-login").val().trim(),
+            teacherId: teacher,
+            groupNumber: group,
+            password: $("#input-password").val().trim(),
+            roles: roles
+        }
+        registerUser(registerCreds);
     }
-    registerUser(registerCreds);
-})
-
-$('#button-back').click(function (){
-    $('#role-choice').removeClass("d-none");
-    $('#register-user').addClass("d-none");
-    $('#group-div').removeClass('d-none')
-    $('#teacher-div').removeClass('d-none')
-    $('#input-login').val("");
-    $('#input-password').val("");
-    $('#input-teacher-id').val("");
-    $('#input-group-id').val("");
-    $('#input-teacher-id').prop('required', true);
-    $('#input-group-id').prop('required', true);
-    NEW_ROLES = [];
-})
-
-$('#button-admin').click(function (){
-    $('#role-choice').addClass("d-none");
-    $('#register-user').removeClass("d-none");
-    $('#group-div').addClass('d-none');
-    $('#label-teacher').text("Id учителя");
-    $('#input-teacher-id').prop('required', false);
-    $('#input-group-id').prop('required', false);
-    NEW_ROLES.push(3);
-})
-
-$('#button-student').click(function (){
-    $('#role-choice').addClass("d-none");
-    $('#register-user').removeClass("d-none");
-    $('#teacher-div').addClass('d-none');
-    $('#label-group').text("Номер группы *");
-    $('#input-teacher-id').prop('required', false);
-    NEW_ROLES.push(0);
-})
-
-$('#button-teacher').click(function (){
-    $('#role-choice').addClass("d-none");
-    $('#register-user').removeClass("d-none");
-    $('#group-div').addClass('d-none');
-    $('#label-teacher').text("Id учителя *");
-    $('#input-group-id').prop('required', false);
-    NEW_ROLES.push(1);
-})
-
-$('#button-editor').click(function (){
-    $('#role-choice').addClass("d-none");
-    $('#register-user').removeClass("d-none");
-    $('#group-div').addClass('d-none');
-    $('#label-teacher').text("Id учителя");
-    $('#input-teacher-id').prop('required', false);
-    $('#input-group-id').prop('required', false);
-    NEW_ROLES.push(2);
 })
 
 function CheckValidation(){
+    $('#error').addClass('d-none')
     let login = $('#input-login').val()
     let loginExp = /[a-zA-z]+\w*/
     if(loginExp.test(login) && login.length >= 5){
@@ -93,16 +44,43 @@ function CheckValidation(){
   } else {
     $('#input-password').removeClass('is-invalid');
   }
+
+  let teacher = $('#input-teacher-id').val();
+  let group = $('#input-group-id').val();
+  let roles = $('#input-role').val();
+  if(group === "" && roles.includes("0") || group !== "" && !roles.includes("0")){
+      $('#error').removeClass('d-none')
+      $('#error').text("Должны быть выбранны оба поля 'номер группы' и 'роль студент'")
+      return false
+  }
+    console.log(roles)
+    if(teacher === "" && roles.includes("1") || teacher !== "" && !roles.includes("1")){
+        $('#error').removeClass('d-none')
+        $('#error').text("Должны быть выбранны оба поля 'Имя учителя' и 'роль учитель'")
+        return false
+    }
+    return true
+}
+
+function fillTeachers(){
+    get('http://v1683738.hosted-by-vdsina.ru:5000/teachers')
+        .then(r => {
+            r.forEach(teacher => {
+                $('#input-teacher-id').append(`<option value="${teacher.id}">
+                                       ${teacher.name}
+                                  </option>`)
+                }
+            );
+        })
 }
 
 function navbarChek(){
-    let profileRole;
     get(`http://v1683738.hosted-by-vdsina.ru:5000/users/me`)
         .then(profile => {
             $("#navbar").find("#nickname").text(profile.login);
             ROLES = profile.roles;
-            if(profile.roles.includes(4)){
-                $('#button-admin').removeClass('d-none');
+            if(!profile.roles.includes(4)){
+                $("#input-role option[value='3']").remove();
             }
             $("#signout").click(() => {
                 post(`http://v1683738.hosted-by-vdsina.ru:5000/auth/logout`)
@@ -118,22 +96,16 @@ function navbarChek(){
 }
 
 function registerUser(requestsBody){
-    //todo: do registration
-    /*post('', requestsBody)
+    post('http://v1683738.hosted-by-vdsina.ru:5000/auth/register', requestsBody)
         .then(async (response) =>{
             if (response.ok){
                 let json = await response.json();
-                console.log(json);
-                localStorage.setItem('userToken', json.accessToken)
-                localStorage.setItem('refreshUserToken', json.refreshToken)
+                console.log(json)
                 window.location.href = '../pages/mainpage.html'
-
             }
             else{
-                let json = await response.json();
-                console.log(json);
-                $("#login-form").addClass("invalid");
-                $("#login-form").removeClass("valid");
+                $('#error').text("Ошибка регистрации")
+                $('#error').removeClass('d-none')
             }
-        })*/
+        })
 }
