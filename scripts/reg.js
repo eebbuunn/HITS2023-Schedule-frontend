@@ -45,6 +45,14 @@ function CheckValidation(){
     $('#input-password').removeClass('is-invalid');
   }
 
+    let confirm = $('#input-confirm').val();
+    if (confirm !== password) {
+        $('#input-confirm').addClass('is-invalid');
+        return false;
+    } else {
+        $('#input-confirm').removeClass('is-invalid');
+    }
+
   let teacher = $('#input-teacher-id').val();
   let group = $('#input-group-id').val();
   let roles = $('#input-role').val();
@@ -53,7 +61,6 @@ function CheckValidation(){
       $('#error').text("Должны быть выбранны оба поля 'номер группы' и 'роль студент'")
       return false
   }
-    console.log(roles)
     if(teacher === "" && roles.includes("1") || teacher !== "" && !roles.includes("1")){
         $('#error').removeClass('d-none')
         $('#error').text("Должны быть выбранны оба поля 'Имя учителя' и 'роль учитель'")
@@ -99,13 +106,17 @@ function registerUser(requestsBody){
     post('http://v1683738.hosted-by-vdsina.ru:5000/auth/register', requestsBody)
         .then(async (response) =>{
             if (response.ok){
-                let json = await response.json();
-                console.log(json)
                 window.location.href = '../pages/mainpage.html'
             }
             else{
-                $('#error').text("Ошибка регистрации")
                 $('#error').removeClass('d-none')
+                return response.text().then(text => {
+                    $('#error').text(JSON.parse(text).error);
+                })
             }
+        })
+        .catch(e => {
+            console.log(e)
+            console.log(typeof(e))
         })
 }
