@@ -7,7 +7,42 @@ $(document).ready(function () {
     content: $('.popover-body'),
     placement: 'bottom',
     });
+
+    let hash = window.location.hash;
+    if(hash.includes("#teacher=")){
+        loadForTeacher(hash.substring(9))
+    }
+    else if(hash.includes("#group=")){
+        loadForGroup(hash.substring(7))
+    }
+    else if(hash.includes("#class=")){
+        loadForClass(hash.substring(7))
+    }
 });
+
+function loadForTeacher(id){
+    let name;
+    get('http://v1683738.hosted-by-vdsina.ru:5000/teachers')
+        .then(r => {
+            r.teachers.forEach(t => {
+                if(t.id === id){
+                    name = t.name;
+                    console.log("suck")
+                }
+            })
+        }).then(() => {
+            $('#sch-for').append(` для преподавателя ${name}`)
+    })
+}
+
+function loadForGroup(number){
+    $('#sch-for').append(` для группы ${number}`)
+}
+
+function loadForClass(number){
+    $('#sch-for').append(` для аудитории ${number}`)
+
+}
 
 function navbarChek(){
   get(`http://v1683738.hosted-by-vdsina.ru:5000/users/me`)

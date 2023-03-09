@@ -4,6 +4,18 @@ $(document).ready(function () {
     navbarChek();
 });
 
+$('#button-groups').click(function () {
+    window.location.href = "../pages/schChoice.html#group"
+})
+
+$('#button-teachers').click(function () {
+    window.location.href = "../pages/schChoice.html#teacher"
+})
+
+$('#button-classes').click(function () {
+    window.location.href = "../pages/schChoice.html#class"
+})
+
 function navbarChek(){
     get(`http://v1683738.hosted-by-vdsina.ru:5000/users/me`)
         .then(profile => {
@@ -26,7 +38,7 @@ function navbarChek(){
 }
 
 function isUserAdmin(roles){
-    if (roles.includes(3) || roles.includes(4)){
+    if (roles.includes("ADMIN") || roles.includes("ROOT")){
         return true
     }
     else{
