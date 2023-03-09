@@ -49,3 +49,7 @@
   color: rgb(173, 24, 45);
   border: 1px solid rgb(173, 24, 45);
 }
+.modal-body {
+  color: black;
+  font-size: 18px;
+}
