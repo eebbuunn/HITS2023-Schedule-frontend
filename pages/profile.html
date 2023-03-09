@@ -47,17 +47,28 @@
             </div>
             <div class="col-12">
               <label for="input-roles" class="form-label fw-bold">Роли</label>
-              <div class="input-roles">
-                <select class="form-select" aria-label="Default select example">
-                  <option selected value="0">Студент</option>
-                  <option value="1">Преподаватель</option>
-                  <option value="2">Редактор</option>
-                  <option value="3">Администратор</option>
-                  <option value="5">Root</option>
-                </select>
-                <div class="delete-button" title="Удалить роль">&times;</div>
+              <div class="input-roles checkboxes">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="checkbox" value="0" id="studentCheck" />
+                  <label class="form-check-label" for="studentCheck">Студент</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="checkbox" value="1" id="teacherCheck" />
+                  <label class="form-check-label" for="teacherCheck">Преподаватель</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="checkbox" value="2" id="editorCheck" />
+                  <label class="form-check-label" for="editorCheck">Редактор</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="checkbox" value="3" id="adminCheck" />
+                  <label class="form-check-label" for="adminCheck">Администратор</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="checkbox" value="3" id="rootCheck" />
+                  <label class="form-check-label" for="rootCheck">Root</label>
+                </div>
               </div>
-              <button type="button" class="add-role-btn btn">+ Добавить роль</button>
             </div>
             <div class="col-12 pt-2">
               <label for="input-group" class="form-label fw-bold">Группа</label>

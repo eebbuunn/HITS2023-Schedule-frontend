@@ -11,9 +11,6 @@
   transition: 0.3s;
   margin-left: 10px;
 }
-.input-roles {
-  display: flex;
-}
 .add-role-btn {
   padding: 2px 5px;
   margin-top: 10px;
