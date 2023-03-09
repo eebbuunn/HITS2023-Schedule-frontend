@@ -1,0 +1,44 @@
+.delete-button {
+  margin: auto;
+  vertical-align: middle;
+  color: black;
+  font-weight: 400;
+  padding-bottom: 8px;
+  float: right;
+  font-size: 26px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-left: 10px;
+}
+.input-roles {
+  display: flex;
+}
+.add-role-btn {
+  padding: 2px 5px;
+  margin-top: 10px;
+  background-color: white;
+  border: 2px solid var(--main-color);
+  color: var(--navbar-bg-color);
+}
+.add-role-btn:hover {
+  color: white;
+}
+
+.edit-btn {
+  margin: 2px;
+  color: white;
+}
+.edit-btn:hover {
+  color: white;
+}
+.delete-btn {
+  margin: 2px;
+  background: rgba(173, 24, 45, 0.2);
+  color: rgb(173, 24, 45);
+  border: 1px solid rgb(173, 24, 45);
+}
+.delete-btn:hover {
+  color: white;
+  background: rgb(173, 24, 45);
+}

@@ -20,20 +20,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Kameron&display=swap" rel="stylesheet" />
   </head>
   <body class="bg-light">
-  <nav class="navbar navbar-expand navbar-dark nav-bar-unauthorized" id="navbar">
-    <image class="nav-logo mx-3" src="../logos/navbarLogo.png"></image>
-    <a class="navbar-brand">PurrTime</a>
-    <div class="navbar-nav left-side">
-      <a class="nav-link" href="../pages/users.html" id="users">Пользователи</a>
-      <a class="nav-link" href="/" id="groups">Группы</a>
-      <a class="nav-link" href="/" id="teachers">Преподаватели</a>
-      <a class="nav-link" href="/" id="classes">Аудитории</a>
-    </div>
-    <div class="navbar-nav ms-auto right-side">
-      <a class="nav-link"  id="nickname"></a>
-      <a class="nav-link" id="signout">&nbsp;Выйти</a>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand navbar-dark nav-bar-unauthorized" id="navbar">
+      <image class="nav-logo mx-3" src="../logos/navbarLogo.png"></image>
+      <a class="navbar-brand">PurrTime</a>
+      <div class="navbar-nav left-side">
+        <a class="nav-link" href="../pages/users.html" id="users">Пользователи</a>
+        <a class="nav-link" href="/" id="groups">Группы</a>
+        <a class="nav-link" href="/" id="teachers">Преподаватели</a>
+        <a class="nav-link" href="/" id="classes">Аудитории</a>
+      </div>
+      <div class="navbar-nav ms-auto right-side">
+        <a class="nav-link" id="nickname"></a>
+        <a class="nav-link" id="signout">&nbsp;Выйти</a>
+      </div>
+    </nav>
     <div class="container mt-5 bg-white rounded-2">
       <h2 class="mb-4 pt-2">Выберите отображаемых пользователей</h2>
       <div class="checkboxes pb-5">
@@ -55,7 +55,7 @@
         </div>
         <button type="button" class="btn" id="findButton">Найти</button>
       </div>
-      <div class="card d-none mb-2" id="user-template" style="width: 12rem">
+      <div class="card d-none mb-2" id="user-template" user-id="" style="width: 12rem">
         <div class="card-body">
           <div>
             <img class="user-vector" src="../logos/user.svg" />

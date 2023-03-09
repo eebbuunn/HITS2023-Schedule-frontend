@@ -1,4 +1,4 @@
-import {get, post} from './requests.js';
+import { get, post } from './requests.js';
 async function loadUsers(roles) {
   $('#users-container').empty();
   let url = 'http://v1683738.hosted-by-vdsina.ru:5000/users/?';
@@ -17,22 +17,23 @@ async function loadUsers(roles) {
     let roles = [];
     for (const role of user.roles) {
       switch (role) {
-        case 0:
+        case 'STUDENT':
           roles.push('студент');
           break;
-        case 1:
+        case 'TEACHER':
           roles.push('преподаватель');
           break;
-        case 2:
+        case 'EDITOR':
           roles.push('редактор');
           break;
-        case 3:
+        case 'ADMIN':
           roles.push('администратор');
           break;
       }
     }
     const block = template.clone();
     block.find('.user-login').text(user.login);
+    block.attr('user-id', user.id);
     block.find('.user-role').text(user.role);
     if (user.group != null) {
       block.find('.user-group').text(user.group);
@@ -47,21 +48,22 @@ async function loadUsers(roles) {
   }
 }
 
-function navbarChek(){
-  get(`http://v1683738.hosted-by-vdsina.ru:5000/users/me`)
-      .then(profile => {
-        $("#navbar").find("#nickname").text(profile.login);
-        $("#signout").click(() => {
-          post(`http://v1683738.hosted-by-vdsina.ru:5000/auth/logout`)
-              .then(() => {
-                localStorage.setItem("userToken", "");
-                localStorage.setItem("refreshUserToken", "");
-                window.location.href = '../pages/login.html'
-              });
-        })
-        // todo добавить обработку ролей
-        localStorage.setItem("userId", profile.id);
-      })
+function navbarChek() {
+  get(`http://v1683738.hosted-by-vdsina.ru:5000/users/me`).then((profile) => {
+    $('#navbar').find('#nickname').text(profile.login);
+    $('#signout').click(() => {
+      post(`http://v1683738.hosted-by-vdsina.ru:5000/auth/logout`).then(() => {
+        localStorage.setItem('userToken', '');
+        localStorage.setItem('refreshUserToken', '');
+        window.location.href = '../pages/login.html';
+      });
+    });
+    // todo добавить обработку ролей
+    localStorage.setItem('userId', profile.id);
+  });
+}
+function toUserDetail(user_id) {
+  window.location.href = 'profile.html#' + user_id;
 }
 
 $(document).ready(function () {
@@ -72,5 +74,8 @@ $(document).ready(function () {
       roles.push($(this).val());
     });
     loadUsers(roles);
+  });
+  $(document).on('click', '.card', function () {
+    toUserDetail($(this).attr('user-id'));
   });
 });
