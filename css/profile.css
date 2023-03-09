@@ -39,3 +39,13 @@
   color: white;
   background: rgb(173, 24, 45);
 }
+.delete-btn:active {
+  background: white !important;
+  color: rgb(173, 24, 45) !important;
+  border: 1px solid rgb(173, 24, 45) !important;
+}
+.delete-btn:focus {
+  background: rgba(173, 24, 45, 0.2);
+  color: rgb(173, 24, 45);
+  border: 1px solid rgb(173, 24, 45);
+}
