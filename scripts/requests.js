@@ -18,8 +18,9 @@ export function get(url) {
       Authorization: 'Bearer ' + localStorage.getItem('userToken'),
     }),
   }).then((response) => {
-    return response.json();
-  });
+    if (response.status === 401) RefreshWhenExpired()
+    else return response.json();
+  })
 }
 
 export function put(url, body) {
@@ -50,9 +51,12 @@ export function del(url) {
 }
 
 function RefreshWhenExpired() {
-  post('http://v1683738.hosted-by-vdsina.ru:5000/auth/refresh', localStorage.getItem('refreshUserToken')).then((r) => {
-    let json = r.json();
-    localStorage.setItem('userToken', json.accessToken);
-    localStorage.setItem('refreshUserToken', json.refreshToken);
-  });
+  post(`http://v1683738.hosted-by-vdsina.ru:5000/auth/refresh?token=${localStorage.getItem('refreshUserToken')}`)
+    .then(async (response) =>{
+      if (response.ok){
+        let newToken = await response.json();
+        localStorage.setItem('userToken', newToken.accessToken);
+        localStorage.setItem('refreshUserToken', newToken.refreshToken);
+      }
+    })
 }
