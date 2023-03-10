@@ -18,6 +18,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Kameron&display=swap" rel="stylesheet" />
   </head>
   <body class="bg-light">
+  <div id="lesson-template" class="d-none card m-2">
+    <div class="card-body p-2 ps-3">
+      <h5 class="l-name card-title fw-bold">Пара нейм</h5>
+      <p class="l-class card-subtitle pb-1">Место нейм</p>
+      <h6 class="l-group card-text">группа нейм</h6>
+    </div>
+  </div>
     <nav class="navbar navbar-expand navbar-dark nav-bar-unauthorized" id="navbar">
       <image class="nav-logo mx-3" src="../logos/navbarLogo.png"></image>
       <a class="navbar-brand">PurrTime</a>
@@ -45,7 +52,7 @@
           Что означают цвета?
         </span>
       </div>
-      <table class="table table-bordered">
+      <table id="schedule-table" class="table table-bordered">
         <thead>
           <tr>
             <th style="width: 24px"></th>
@@ -81,69 +88,69 @@
               <p class="text-center h6">8:45</p>
               <p class="text-center text-secondary h6">10:20</p>
             </th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td id="c0"></td>
+            <td id="c1"></td>
+            <td id="c2"></td>
+            <td id="c3"></td>
+            <td id="c4"></td>
+            <td id="c5"></td>
           </tr>
           <tr>
             <th>
               <p class="text-center h6">10:35</p>
               <p class="text-center text-secondary h6">12:10</p>
             </th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td id="c6"></td>
+            <td id="c7"></td>
+            <td id="c8"></td>
+            <td id="c9"></td>
+            <td id="c10"></td>
+            <td id="c11"></td>
           </tr>
           <tr>
             <th>
               <p class="text-center h6">12:25</p>
               <p class="text-center text-secondary h6">14:00</p>
             </th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td id="c12"></td>
+            <td id="c13"></td>
+            <td id="c14"></td>
+            <td id="c15"></td>
+            <td id="c16"></td>
+            <td id="c17"></td>
           </tr>
           <tr>
             <th>
               <p class="text-center h6">14:45</p>
               <p class="text-center text-secondary h6">16:20</p>
             </th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td id="c18"></td>
+            <td id="c19"></td>
+            <td id="c20"></td>
+            <td id="c21"></td>
+            <td id="c22"></td>
+            <td id="c23"></td>
           </tr>
           <tr>
             <th>
               <p class="text-center h6">16:35</p>
               <p class="text-center text-secondary h6">18:10</p>
             </th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td id="c24"></td>
+            <td id="c25"></td>
+            <td id="c26"></td>
+            <td id="c27"></td>
+            <td id="c28"></td>
+            <td id="c29"></td>
           </tr>
           <tr>
             <th></th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td id="c30"></td>
+            <td id="c31"></td>
+            <td id="c32"></td>
+            <td id="c33"></td>
+            <td id="c34"></td>
+            <td id="c35"></td>
           </tr>
         </tbody>
       </table>
