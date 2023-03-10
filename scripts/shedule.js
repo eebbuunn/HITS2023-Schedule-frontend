@@ -108,11 +108,26 @@ function isUserAdmin(roles){
 }
 
 function setDateWeek(){
-    let dateStart = new Date()
-    let dateEnd = new Date()
+    let sd = localStorage.getItem('startDate');
+    let ed = localStorage.getItem('endDate');
+    let dateEnd;
+    let dateStart;
+    if (sd == null){
+        dateStart = new Date();
+        dateEnd = new Date();
+    }
+    else{
+        dateStart = new Date(sd) ;
+        dateEnd = new Date(ed) ;
+        console.log(dateStart, dateEnd);
+    }
+    // let dateEnd = new Date();
+    // let dateStart = new Date();
+    console.log(dateStart, dateEnd);
     let weekDay = dateStart.getDay();
     dateStart.setDate(dateStart.getDate() - weekDay + 1)
     dateEnd.setDate(dateEnd.getDate() - weekDay + 6)
+    console.log(dateStart, dateEnd);
 
     START_DATE = dateStart
     END_DATE = dateEnd
@@ -127,6 +142,7 @@ function setDateWeek(){
 
     dateStart = getFormattedDate(dateStart)
     dateEnd = getFormattedDate(dateEnd)
+    console.log(dateStart, dateEnd);
 
     $('#date-week').text(`${dateStart} - ${dateEnd}`)
 }
@@ -167,3 +183,21 @@ function setMain(){
         loadForClass(hash.substring(7))
     }
 }
+
+
+
+$("#nextWeek").click(function (){
+    START_DATE.setDate(START_DATE.getDate() + 7);
+    END_DATE.setDate(END_DATE.getDate() + 7);
+    localStorage.setItem('startDate', START_DATE);
+    localStorage.setItem('endDate', END_DATE);
+    window.location.reload();
+})
+
+$("#previousWeek").click(function (){
+    START_DATE.setDate(START_DATE.getDate() - 7);
+    END_DATE.setDate(END_DATE.getDate() - 7);
+    localStorage.setItem('startDate', START_DATE);
+    localStorage.setItem('endDate', END_DATE);
+    window.location.reload();
+})
