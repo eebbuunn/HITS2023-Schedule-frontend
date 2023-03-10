@@ -37,9 +37,39 @@ function loadForTeacher(id){
 function loadForGroup(number){
     $('#sch-for').append(` для группы ${number}`)
 
-    let lessons = get(`http://v1683738.hosted-by-vdsina.ru:5000/groups/${number}/schedule?startsAt=${getDateForUrl(START_DATE)}&endsAt=${getDateForUrl(END_DATE)}`)
+    let timeslots
+    get('http://v1683738.hosted-by-vdsina.ru:5000/timeslots')
         .then(r => {
+            timeslots = r.timeslots;
+        })
 
+    get(`http://v1683738.hosted-by-vdsina.ru:5000/groups/${number}/schedule?startsAt=${getDateForUrl(START_DATE)}&endsAt=${getDateForUrl(END_DATE)}`)
+        .then(r => {
+            let table = $('#schedule-table td');
+            r.lessons.forEach(l => {
+                let slotIndex
+                for (let i = 0; i < timeslots.length; i++) {
+                    if (timeslots[i].id === l.timeslot.id){
+                        slotIndex = i;
+                        break;
+                    }
+                }
+
+                let lessonDate = new Date(l.date);
+                let timeDiff = Math.abs(lessonDate - START_DATE);
+                let daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                let cell = slotIndex * 6 + daysDiff;
+
+                let $template, $lessonCard;
+                $template = $("#lesson-template");
+                $lessonCard = $template.clone();
+                $lessonCard.removeClass("d-none");
+                $lessonCard.find(".l-class").text(l.lesson.cabinet.number);
+                $lessonCard.find(".l-name").text(l.lesson.subject)
+                $lessonCard.find(".l-group").text(l.lesson.groups);
+                console.log($lessonCard)
+                $(`#c${cell}`).append($lessonCard);
+            });
         })
 }
 
