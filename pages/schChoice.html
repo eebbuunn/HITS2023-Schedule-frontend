@@ -19,12 +19,12 @@
 <body class="bg-light">
 <nav class="navbar navbar-expand navbar-dark nav-bar-unauthorized" id="navbar">
     <image class="nav-logo mx-3" src="../logos/navbarLogo.png"></image>
-    <a class="navbar-brand">PurrTime</a>
+    <a class="navbar-brand" href="mainpage.html">PurrTime</a>
     <div class="navbar-nav left-side">
         <a class="nav-link" href="../pages/users.html" id="users">Пользователи</a>
-        <a class="nav-link" href="/" id="groups">Группы</a>
-        <a class="nav-link" href="/" id="teachers">Преподаватели</a>
-        <a class="nav-link" href="/" id="classes">Аудитории</a>
+        <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#group', window.location.reload()" id="groups">Группы</a>
+        <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#teacher', window.location.reload()" id="teachers">Преподаватели</a>
+        <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#class', window.location.reload()" id="classes">Аудитории</a>
     </div>
     <div class="navbar-nav ms-auto right-side">
         <a class="nav-link"  id="nickname"></a>

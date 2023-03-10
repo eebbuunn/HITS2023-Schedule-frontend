@@ -65,7 +65,7 @@ function navbarChek(){
 }
 
 function isUserAdmin(roles){
-    if (roles.includes(3 || 4)){
+    if (roles.includes("ADMIN") || roles.includes("ROOT")){
         return true
     }
     else{
