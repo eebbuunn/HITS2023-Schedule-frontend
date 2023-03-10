@@ -2,6 +2,17 @@ import { get, post } from "./requests.js";
 
 let START_DATE
 let END_DATE
+let type = {
+    LECTURE: "lecture_bg_color",
+    SEMINAR: "seminar_bg_color",
+    PRACTICE: "practical_bg_color",
+    LABWORK: "lab_bg_color",
+    INDIVIDUAL_LESSON: "individual_bg_color",
+    CONTROL_POINT: "control_bg_color",
+    CONSULTATION: "consultation_bg_color",
+    RESERVATION: "booking_bg_color",
+    OTHER : "other_bg_color"
+}
 let WEEK_DAY = ['ВАГИНА', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ']
 let MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
 
@@ -17,6 +28,9 @@ $(document).ready(function () {
     setMain()
 });
 
+
+//main
+
 function loadForTeacher(id){
     let name;
     get('http://v1683738.hosted-by-vdsina.ru:5000/teachers')
@@ -24,18 +38,11 @@ function loadForTeacher(id){
             r.teachers.forEach(t => {
                 if(t.id === id){
                     name = t.name;
-                    console.log("suck")
                 }
             })
         }).then(() => {
             $('#sch-for').append(` для преподавателя ${name}`)
     })
-
-    //todo: fill lessons in db
-}
-
-function loadForGroup(number){
-    $('#sch-for').append(` для группы ${number}`)
 
     let timeslots
     get('http://v1683738.hosted-by-vdsina.ru:5000/timeslots')
@@ -43,9 +50,8 @@ function loadForGroup(number){
             timeslots = r.timeslots;
         })
 
-    get(`http://v1683738.hosted-by-vdsina.ru:5000/groups/${number}/schedule?startsAt=${getDateForUrl(START_DATE)}&endsAt=${getDateForUrl(END_DATE)}`)
+    get(`http://v1683738.hosted-by-vdsina.ru:5000/teachers/${id}/schedule?startsAt=${getDateForUrl(START_DATE)}&endsAt=${getDateForUrl(END_DATE)}`)
         .then(r => {
-            let table = $('#schedule-table td');
             r.lessons.forEach(l => {
                 let slotIndex
                 for (let i = 0; i < timeslots.length; i++) {
@@ -60,15 +66,40 @@ function loadForGroup(number){
                 let daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
                 let cell = slotIndex * 6 + daysDiff;
 
-                let $template, $lessonCard;
-                $template = $("#lesson-template");
-                $lessonCard = $template.clone();
-                $lessonCard.removeClass("d-none");
-                $lessonCard.find(".l-class").text(l.lesson.cabinet.number);
-                $lessonCard.find(".l-name").text(l.lesson.subject)
-                $lessonCard.find(".l-group").text(l.lesson.groups);
-                console.log($lessonCard)
-                $(`#c${cell}`).append($lessonCard);
+                let lessonCard = getFilledLesson(l)
+                $(`#c${cell}`).append(lessonCard);
+            });
+        })
+}
+
+function loadForGroup(number){
+    $('#sch-for').append(` для группы ${number}`)
+
+    let timeslots
+    get('http://v1683738.hosted-by-vdsina.ru:5000/timeslots')
+        .then(r => {
+            timeslots = r.timeslots;
+        })
+
+    get(`http://v1683738.hosted-by-vdsina.ru:5000/groups/${number}/schedule?startsAt=${getDateForUrl(START_DATE)}&endsAt=${getDateForUrl(END_DATE)}`)
+        .then(r => {
+            r.lessons.forEach(l => {
+                let slotIndex
+                for (let i = 0; i < timeslots.length; i++) {
+                    if (timeslots[i].id === l.timeslot.id){
+                        slotIndex = i;
+                        break;
+                    }
+                }
+
+                let lessonDate = new Date(l.date);
+                let timeDiff = Math.abs(lessonDate - START_DATE);
+                let daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                let cell = slotIndex * 6 + daysDiff;
+
+                let lessonCard = getFilledLesson(l)
+                $(`#c${cell}`).append(lessonCard);
+
             });
         })
 }
@@ -76,7 +107,49 @@ function loadForGroup(number){
 function loadForClass(number){
     $('#sch-for').append(` для аудитории ${number}`)
 
+    let timeslots
+    get('http://v1683738.hosted-by-vdsina.ru:5000/timeslots')
+        .then(r => {
+            timeslots = r.timeslots;
+        })
+
+    get(`http://v1683738.hosted-by-vdsina.ru:5000/cabinets/${number}/schedule?startsAt=${getDateForUrl(START_DATE)}&endsAt=${getDateForUrl(END_DATE)}`)
+        .then(r => {
+            r.lessons.forEach(l => {
+                let slotIndex
+                for (let i = 0; i < timeslots.length; i++) {
+                    if (timeslots[i].id === l.timeslot.id){
+                        slotIndex = i;
+                        break;
+                    }
+                }
+
+                let lessonDate = new Date(l.date);
+                let timeDiff = Math.abs(lessonDate - START_DATE);
+                let daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                let cell = slotIndex * 6 + daysDiff;
+
+                let lessonCard = getFilledLesson(l)
+                $(`#c${cell}`).append(lessonCard);
+            });
+        })
 }
+
+function getFilledLesson(lesson){
+    let template, lessonCard;
+    template = $("#lesson-template");
+    lessonCard = template.clone();
+    lessonCard.removeClass("d-none");
+    lessonCard.find(".l-class").text(lesson.lesson.cabinet.number);
+    lessonCard.find(".l-name").text(lesson.lesson.subject)
+    lessonCard.find(".l-group").text(lesson.lesson.groups);
+    lessonCard.addClass(type[lesson.lesson.type])
+    return lessonCard;
+}
+
+
+
+//navbar
 
 function navbarChek(){
   get(`http://v1683738.hosted-by-vdsina.ru:5000/users/me`)
@@ -106,6 +179,10 @@ function isUserAdmin(roles){
         return false
     }
 }
+
+
+
+//auxiliary
 
 function setDateWeek(){
     let sd = localStorage.getItem('startDate');
@@ -185,6 +262,7 @@ function setMain(){
 }
 
 
+//buttons
 
 $("#nextWeek").click(function (){
     START_DATE.setDate(START_DATE.getDate() + 7);
