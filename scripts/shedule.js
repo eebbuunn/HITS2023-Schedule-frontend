@@ -1,4 +1,10 @@
 import { get, post } from "./requests.js";
+
+let START_DATE
+let END_DATE
+let WEEK_DAY = ['ВАГИНА', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ']
+let MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+
 $(document).ready(function () {
     navbarChek();
     $('#legend').popover({
@@ -7,17 +13,9 @@ $(document).ready(function () {
     content: $('.popover-body'),
     placement: 'bottom',
     });
-
-    let hash = window.location.hash;
-    if(hash.includes("#teacher=")){
-        loadForTeacher(hash.substring(9))
-    }
-    else if(hash.includes("#group=")){
-        loadForGroup(hash.substring(7))
-    }
-    else if(hash.includes("#class=")){
-        loadForClass(hash.substring(7))
-    }
+    setDateWeek()
+    setMain()
+    getScheduleForCurWeek(START_DATE)
 });
 
 function loadForTeacher(id){
@@ -33,10 +31,17 @@ function loadForTeacher(id){
         }).then(() => {
             $('#sch-for').append(` для преподавателя ${name}`)
     })
+
+    //todo: fill lessons in db
 }
 
 function loadForGroup(number){
     $('#sch-for').append(` для группы ${number}`)
+
+    let lessons = get(`http://v1683738.hosted-by-vdsina.ru:5000/groups/${number}/schedule?startsAt=${getDateForUrl(START_DATE)}&endsAt=${getDateForUrl(END_DATE)}`)
+        .then(r => {
+
+        })
 }
 
 function loadForClass(number){
@@ -70,5 +75,66 @@ function isUserAdmin(roles){
     }
     else{
         return false
+    }
+}
+
+function setDateWeek(){
+    let dateStart = new Date()
+    let dateEnd = new Date()
+    let weekDay = dateStart.getDay();
+    dateStart.setDate(dateStart.getDate() - weekDay + 1)
+    dateEnd.setDate(dateEnd.getDate() - weekDay + 6)
+
+    START_DATE = dateStart
+    END_DATE = dateEnd
+
+    $('#monday').text(getColDate(dateStart, 0))
+    $('#tuesday').text(getColDate(dateStart, 1))
+    $('#wednesday').text(getColDate(dateStart, 1))
+    $('#thursday').text(getColDate(dateStart, 1))
+    $('#friday').text(getColDate(dateStart, 1))
+    $('#saturday').text(getColDate(dateStart, 1))
+    START_DATE.setDate(START_DATE.getDate() - 5)
+
+    dateStart = getFormattedDate(dateStart)
+    dateEnd = getFormattedDate(dateEnd)
+
+    $('#date-week').text(`${dateStart} - ${dateEnd}`)
+}
+
+function getFormattedDate(datetime) {
+    var date = new Date(datetime);
+    let year = date.getFullYear();
+    let month = MONTHS[date.getMonth()];
+    let day = date.getDate().toString().padStart(2, '0');
+    return day + ' ' + month + ' ' + year;
+}
+
+function getColDate(datetime, daysPlus){
+    datetime.setDate(datetime.getDate() + daysPlus)
+    var date = new Date(datetime);
+    let month = MONTHS[date.getMonth()];
+    let day = date.getDate().toString().padStart(2, '0');
+    return day + ' ' + month;
+}
+
+function getDateForUrl(datetime) {
+    var date = new Date(datetime);
+    let year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+    return year + '-' + month + '-' + day;
+}
+
+function setMain(){
+    let hash = window.location.hash;
+    if(hash.includes("#teacher=")){
+        loadForTeacher(hash.substring(9))
+    }
+    else if(hash.includes("#group=")){
+        loadForGroup(hash.substring(7))
+    }
+    else if(hash.includes("#class=")){
+        loadForClass(hash.substring(7))
     }
 }
