@@ -79,7 +79,7 @@ function isUserAdmin(roles){
 
 function setDateWeek(){
     let sd = localStorage.getItem('startDate');
-    let ed = localStorage.getItem('endDate');
+    // let ed = localStorage.getItem('endDate');
     let dateEnd;
     let dateStart;
     if (sd == null){
@@ -88,7 +88,7 @@ function setDateWeek(){
     }
     else{
         dateStart = new Date(sd) ;
-        dateEnd = new Date(ed) ;
+        dateEnd = new Date(sd) ;
         console.log(dateStart, dateEnd);
     }
     // let dateEnd = new Date();
@@ -158,16 +158,16 @@ function setMain(){
 
 $("#nextWeek").click(function (){
     START_DATE.setDate(START_DATE.getDate() + 7);
-    END_DATE.setDate(END_DATE.getDate() + 7);
+    // END_DATE.setDate(END_DATE.getDate() + 2);
     localStorage.setItem('startDate', START_DATE);
-    localStorage.setItem('endDate', END_DATE);
+    // localStorage.setItem('endDate', END_DATE);
     window.location.reload();
 })
 
 $("#previousWeek").click(function (){
     START_DATE.setDate(START_DATE.getDate() - 7);
-    END_DATE.setDate(END_DATE.getDate() - 7);
+    // END_DATE.setDate(END_DATE.getDate() - 12);
     localStorage.setItem('startDate', START_DATE);
-    localStorage.setItem('endDate', END_DATE);
+    // localStorage.setItem('endDate', END_DATE);
     window.location.reload();
 })

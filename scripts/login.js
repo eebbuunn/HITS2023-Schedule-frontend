@@ -21,6 +21,7 @@ export function setLoginButtonEvent() {
                     console.log(json);
                     localStorage.setItem('userToken', json.accessToken)
                     localStorage.setItem('refreshUserToken', json.refreshToken)
+                    localStorage.removeItem('startDate');
                     window.location.href = '../pages/mainpage.html'
 
                 }
