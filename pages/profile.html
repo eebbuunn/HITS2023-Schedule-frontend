@@ -36,14 +36,14 @@
     </nav>
 
     <main class="container p-4">
-      <div class="row bg-white p-3 rounded-3 gy-4 mt-3" data-id="" nickName="" id="profile-template">
+      <div class="row bg-white p-3 rounded-3 gy-4 mt-3 d-none" data-id="" nickName="" id="profile-template">
         <div class="col-8 col-sm-7 mx-auto col-md-5 col-lg-4">
           <img class="profile-image img-fluid rounded-3" alt="Profile Image" src="../logos/user.svg" />
         </div>
         <div class="col-12 col-lg-8">
           <form class="row">
             <div class="col-12">
-              <h1 class="profile-nickname">NickName</h1>
+              <h1 class="profile-nickname" id="profile-nickname">NickName</h1>
             </div>
             <div class="col-12">
               <label for="input-roles" class="form-label fw-bold">Роли</label>
@@ -72,15 +72,11 @@
             </div>
             <div class="col-12 pt-2 input-group-container d-none">
               <label for="input-group" class="form-label fw-bold">Группа</label>
-              <select class="form-select" aria-label="Default select example" id="input-group">
-                <option value="0"></option>
-              </select>
+              <select class="form-select" aria-label="Default select example" id="input-group"></select>
             </div>
             <div class="col-12 pt-2 input-teacher-container d-none">
               <label for="input-teacher" class="form-label fw-bold">Преподаватель</label>
-              <select class="form-select" aria-label="Default select example" id="input-teacher">
-                <option value="0"></option>
-              </select>
+              <select class="form-select" aria-label="Default select example" id="input-teacher"></select>
             </div>
             <div class="col-12 pt-2">
               <label for="input-avatar-link" class="form-label fw-bold">Ссылка на аватар</label>
