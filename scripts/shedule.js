@@ -69,7 +69,9 @@ function loadForTeacher(id){
                 let lessonCard = getFilledLesson(l)
                 $(`#c${cell}`).append(lessonCard);
             });
+            console.log("aaaaa chleeen")
         })
+    //todo: не инициализируется timeslots из за шайтана
 }
 
 function loadForGroup(number){
