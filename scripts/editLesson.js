@@ -30,6 +30,7 @@ $("#edit-all").click(function (){
     $("#input-cabinet-edit").removeAttr('disabled');
     $("#input-type-edit").removeAttr('disabled');
     $("#input-timeslot-edit").removeAttr('disabled');
+    $("#input-week-edit").removeAttr('disabled');
 })
 
 $("#cancel").click(function (){
@@ -49,6 +50,7 @@ $("#cancel").click(function (){
     $("#input-type-edit").attr('disabled', true);
     $("#input-timeslot-edit").attr('disabled', true);
     $("#input-date-cur-edit").attr('disabled', true);
+    $("#input-week-edit").attr('disabled', true);
 })
 
 export function loadSelectors(teacherId, group, cabinet, timeslot, subj){
@@ -156,17 +158,16 @@ $('#edit-ok-single').click(function (){
 })
 
 $('#edit-ok-all').click(function (){
-    let day = new Date($("#input-date-cur-edit").val()).getDay();
     let body  = {
         teacher: $('#input-teacher-id-edit').val(),
         subject: $('#input-subject-edit').val(),
         groups: $('#input-groups-edit').val(),
         cabinet: $('#input-cabinet-edit').val(),
         timeslot:$('#input-timeslot-edit').val(),
-        day: WEEK_DAY[day],
         type:  $('#input-type-edit').val(),
         startsAt: $('#input-date-start-edit').val(),
-        endsAt: $('#input-date-end-edit').val()
+        endsAt: $('#input-date-end-edit').val(),
+        day: $('#input-week-edit').val()
     }
 
     console.log(body);

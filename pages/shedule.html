@@ -45,16 +45,7 @@
         </div>
         <div class="modal-body">
           <label id="label-group" class="form-label fw-bold" for="input-subject">Предмет</label>
-          <select class="form-select form-control" id="input-subject">
-            <option value="121f601a-6009-4342-a514-8958bf056d16">English language</option>
-            <option value="223355ca-415f-4b2e-bbcb-114452242017">Albebra</option>
-            <option value="3429d37d-d1e1-43a3-92d8-bef007806616">Amogusing</option>
-            <option value="41e06c50-0ed9-4d8e-8ed0-6c56a5dadc83">Linear bebra</option>
-            <option value="4951c037-dd1d-4734-a94b-152151a8d79e">Meth cooking</option>
-            <option value="55014fbb-f50b-4091-b523-f447b6d4d827">Programming</option>
-            <option value="c8e097f1-32b1-4988-8191-11239b673f88">Requirements development</option>
-            <option value="f356a853-338b-4f69-a569-6347b55d7ab1">Russian language</option>
-          </select>
+          <select class="form-select form-control" id="input-subject"></select>
 
           <label id="label-teacher" class="form-label fw-bold mt-3" for="input-teacher-id">Имя учителя</label>
           <select class="form-select form-control" id="input-teacher-id"></select>
@@ -75,7 +66,7 @@
             <option value="CONTROL_POINT">CONTROL_POINT</option>
             <option value="CONSULTATION">CONSULTATION</option>
             <option value="RESERVATION">RESERVATION</option>
-            <option value="OTHER ">OTHER</option>
+            <option value="OTHER">OTHER</option>
           </select>
 
           <div class="d-flex flex-row">
@@ -293,6 +284,16 @@
 
             <label id="label-timeslot-edit" class="form-label fw-bold mt-3" for="input-type">Время занятия</label>
             <select class="form-select form-control" disabled id="input-timeslot-edit"></select>
+
+            <label id="label-week-edit" class="form-label fw-bold mt-3" for="input-type">День недели</label>
+            <select class="form-select form-control" disabled id="input-week-edit">
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+            </select>
 
             <div class="d-flex flex-row">
               <label id="label-date-start-edit" class="form-label fw-bold my-3 me-3" for="input-date-start">Дата начала</label>

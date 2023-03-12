@@ -1,4 +1,4 @@
-import { del, get, put } from './requests.js';
+import {del, get, post, put} from './requests.js';
 
 async function deleteUser(user_id) {
   const url = 'http://v1683738.hosted-by-vdsina.ru:5000/users/' + user_id;
@@ -124,7 +124,8 @@ async function editUser(user_id) {
 }
 
 $(document).ready(function () {
-  const user_id = window.location.href.substring(41);
+  navbarChek()
+  const user_id = window.location.hash.substring(1);
   loadProfile(user_id);
   $('#studentCheck').change(function () {
     if ($('#studentCheck').prop('checked')) {
@@ -149,3 +150,23 @@ $(document).ready(function () {
     editUser(user_id);
   });
 });
+
+function navbarChek(){
+  get(`http://v1683738.hosted-by-vdsina.ru:5000/users/me`)
+      .then(profile => {
+        $("#navbar").find("#nickname").text(profile.login);
+        /*if (!isUserAdmin(profile.roles)){
+          $("#users").addClass("d-none")
+        }*/
+        $("#signout").click(() => {
+          post(`http://v1683738.hosted-by-vdsina.ru:5000/auth/logout`)
+              .then(() => {
+                localStorage.setItem("userToken", "");
+                localStorage.setItem("refreshUserToken", "");
+                window.location.href = '../pages/login.html'
+              });
+        })
+        // todo добавить обработку ролей
+        localStorage.setItem("userId", profile.id);
+      })
+}

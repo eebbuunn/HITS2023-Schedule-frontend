@@ -14,7 +14,7 @@ let type = {
     RESERVATION: "booking_bg_color",
     OTHER : "other_bg_color"
 }
-let WEEK_DAY = ['ВАГИНА', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ']
+let WEEK_DAY = ['Gbcmrb', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 let MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
 export let lessonEdit
 
@@ -190,7 +190,7 @@ function getFilledLesson(lesson){
         loadSelectors(lessonEdit.teacherID, lesson.lesson.groups, lesson.lesson.cabinet.number, lesson.timeslot.id, lesson.lesson.subject);
         $('#input-type-edit').val(lesson.lesson.type);
         $("#input-date-cur-edit").val(getFormattedDateTrue(lesson.date));
-        console.log(lesson.date);
+        $('#input-week-edit').val(WEEK_DAY[new Date(lesson.date).getDay()])
     })
 
     lessonCard.addClass(type[lesson.lesson.type])

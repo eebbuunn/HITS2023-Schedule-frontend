@@ -58,6 +58,13 @@ function RefreshWhenExpired() {
         localStorage.setItem('userToken', newToken.accessToken);
         localStorage.setItem('refreshUserToken', newToken.refreshToken);
         window.location.reload()
+      } else {
+        post(`http://v1683738.hosted-by-vdsina.ru:5000/auth/logout`)
+            .then(() => {
+              localStorage.setItem("userToken", "");
+              localStorage.setItem("refreshUserToken", "");
+              window.location.href = '../pages/login.html'
+            });
       }
     })
 }

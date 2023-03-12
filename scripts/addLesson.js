@@ -17,6 +17,11 @@ function setDefaultValuesInAdd() {
         $('#label-teacher').addClass('d-none')
     }
 
+    if(hash.includes("#group=")){
+        let group = hash.substring(7)
+        $(`#input-groups`).val(group)
+    }
+
     if(hash.includes("#class=")){
         let cabinet = hash.substring(7)
         $(`#input-cabinet`).val(cabinet)
@@ -116,6 +121,16 @@ function loadSelectors(){
             r.teachers.forEach(teacher => {
                     $('#input-teacher-id').append(`<option value="${teacher.id}">
                                        ${teacher.name}
+                                  </option>`)
+                }
+            );
+        })
+
+    get('http://v1683738.hosted-by-vdsina.ru:5000/subjects')
+        .then(r => {
+            r.subjects.forEach(s => {
+                    $('#input-subject').append(`<option value="${s.id}">
+                                       ${s.name}
                                   </option>`)
                 }
             );
