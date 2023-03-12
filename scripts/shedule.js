@@ -298,6 +298,7 @@ $("#del-les-single").click(function (){
                 window.location.reload();
             }
             else {
+                $("#error").removeClass("d-none");
                 let json = r.json();
                 console.log(json);
             }
