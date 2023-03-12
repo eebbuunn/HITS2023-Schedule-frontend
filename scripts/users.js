@@ -60,6 +60,9 @@ async function loadUsers(roles) {
 function navbarChek() {
   get(`http://v1683738.hosted-by-vdsina.ru:5000/users/me`).then((profile) => {
     $('#navbar').find('#nickname').text(profile.login);
+    if(!profile.roles.includes("ADMIN") && !profile.roles.includes("ROOT")){
+      window.location.href = "../pages/mainpage.html"
+    }
     $('#signout').click(() => {
       post(`http://v1683738.hosted-by-vdsina.ru:5000/auth/logout`).then(() => {
         localStorage.setItem('userToken', '');
