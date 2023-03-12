@@ -10,62 +10,64 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../css/schedule.css" />
     <link rel="stylesheet" href="../css/colors.css" />
     <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/schedule.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Kameron&display=swap" rel="stylesheet" />
   </head>
   <body class="bg-light">
-  <div id="lesson-template" data-bs-toggle="modal" data-bs-target="#edit-modal" class="d-none card m-2">
-    <div class="card-body p-2 ps-3 lesson-card">
-      <h5 class="l-name card-title fw-bold">Пара нейм</h5>
-      <p class="l-class card-subtitle pb-1">Место нейм</p>
-      <h6 class="l-group card-text">группа нейм</h6>
+    <div id="lesson-template" data-bs-toggle="modal" data-bs-target="#edit-modal" class="d-none card m-2">
+      <div class="card-body p-2 ps-3 lesson-card">
+        <h5 class="l-name card-title fw-bold">Пара нейм</h5>
+        <p class="l-class card-subtitle pb-1">Место нейм</p>
+        <h6 class="l-group card-text">группа нейм</h6>
+      </div>
     </div>
-  </div>
-  <div id="add-template" class="button-add d-none w-100 d-flex justify-content-center" style="">
-    <button id='button-add-lesson' class="btn btn-dark w-100 my-2 bg-white" style="
-     font-size: 52px;
-     color: #00615d;
-     border: 1px solid #00615d;
-     vertical-align: 24px" data-bs-toggle="modal" data-bs-target="#create-modal">
-      +
-    </button>
-  </div>
+    <div id="add-template" class="button-add d-none w-100 d-flex justify-content-center" style="">
+      <button
+        id="button-add-lesson"
+        class="btn btn-dark w-100 my-2 bg-white button-add-lesson"
+        style="font-size: 52px; color: #00615d; border: 1px solid #00615d; vertical-align: 24px"
+        data-bs-toggle="modal"
+        data-bs-target="#create-modal"
+      >
+        +
+      </button>
+    </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="create-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <label id="label-group" class="form-label fw-bold" for="input-subject">Предмет</label>
-          <select class="form-select form-control" id="input-subject">
-            <option value="121f601a-6009-4342-a514-8958bf056d16">English language</option>
-            <option value="223355ca-415f-4b2e-bbcb-114452242017">Albebra</option>
-            <option value="3429d37d-d1e1-43a3-92d8-bef007806616">Amogusing</option>
-            <option value="41e06c50-0ed9-4d8e-8ed0-6c56a5dadc83">Linear bebra</option>
-            <option value="4951c037-dd1d-4734-a94b-152151a8d79e">Meth cooking</option>
-            <option value="55014fbb-f50b-4091-b523-f447b6d4d827">Programming</option>
-            <option value="c8e097f1-32b1-4988-8191-11239b673f88">Requirements development</option>
-            <option value="f356a853-338b-4f69-a569-6347b55d7ab1">Russian language</option>
-          </select>
+    <!-- Modal -->
+    <div class="modal fade" id="create-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <label id="label-group" class="form-label fw-bold" for="input-subject">Предмет</label>
+            <select class="form-select form-control" id="input-subject">
+              <option value="121f601a-6009-4342-a514-8958bf056d16">English language</option>
+              <option value="223355ca-415f-4b2e-bbcb-114452242017">Albebra</option>
+              <option value="3429d37d-d1e1-43a3-92d8-bef007806616">Amogusing</option>
+              <option value="41e06c50-0ed9-4d8e-8ed0-6c56a5dadc83">Linear bebra</option>
+              <option value="4951c037-dd1d-4734-a94b-152151a8d79e">Meth cooking</option>
+              <option value="55014fbb-f50b-4091-b523-f447b6d4d827">Programming</option>
+              <option value="c8e097f1-32b1-4988-8191-11239b673f88">Requirements development</option>
+              <option value="f356a853-338b-4f69-a569-6347b55d7ab1">Russian language</option>
+            </select>
 
-          <label id="label-teacher" class="form-label fw-bold mt-3" for="input-teacher-id">Имя учителя</label>
-          <select class="form-select form-control" id="input-teacher-id"></select>
+            <label id="label-teacher" class="form-label fw-bold mt-3" for="input-teacher-id">Имя учителя</label>
+            <select class="form-select form-control" id="input-teacher-id"></select>
 
-          <label id="label-groups" class="form-label fw-bold mt-3" for="input-groups">Группы</label>
-          <select class="form-select form-control" id="input-groups" multiple required></select>
+            <label id="label-groups" class="form-label fw-bold mt-3" for="input-groups">Группы</label>
+            <select class="form-select form-control" id="input-groups" multiple required></select>
 
-          <label id="label-cabinet" class="form-label fw-bold mt-3" for="input-cabinet">Аудитория</label>
-          <select class="form-select form-control" id="input-cabinet"></select>
+            <label id="label-cabinet" class="form-label fw-bold mt-3" for="input-cabinet">Аудитория</label>
+            <select class="form-select form-control" id="input-cabinet"></select>
 
-          <!--<label id="label-time" class="form-label fw-bold mt-3" for="input-time">Время</label>
+            <!--<label id="label-time" class="form-label fw-bold mt-3" for="input-time">Время</label>
           <select class="form-select form-control" id="input-time">
             <option value="1f0c2b59-105a-47ce-a56a-843eb110cda1">8:45 - 10:20</option>
             <option value="735bac68-9006-484b-a6ea-6c1461270d12">10:35 - 12:10</option>
@@ -76,7 +78,7 @@
             <option value="d772c139-2501-4c29-972f-9ab402451225">20:15 - 21:50</option>
           </select>-->
 
-          <!--<label id="label-day" class="form-label fw-bold mt-3" for="input-day">День недели</label>
+            <!--<label id="label-day" class="form-label fw-bold mt-3" for="input-day">День недели</label>
           <select class="form-select form-control" id="input-day">
             <option value="Sunday">Sunday</option>
             <option value="Monday">Monday</option>
@@ -87,59 +89,63 @@
             <option value="Saturday">Saturday</option>
           </select>-->
 
-          <label id="label-type" class="form-label fw-bold mt-3" for="input-type">Тип занятия</label>
-          <select class="form-select form-control" id="input-type">
-            <option value="LECTURE">LECTURE</option>
-            <option value="SEMINAR">SEMINAR</option>
-            <option value="PRACTICE">PRACTICE</option>
-            <option value="LABWORK">LABWORK</option>
-            <option value="INDIVIDUAL_LESSON">INDIVIDUAL_LESSON</option>
-            <option value="CONTROL_POINT">CONTROL_POINT</option>
-            <option value="CONSULTATION">CONSULTATION</option>
-            <option value="RESERVATION">RESERVATION</option>
-            <option value="OTHER ">OTHER</option>
-          </select>
+            <label id="label-type" class="form-label fw-bold mt-3" for="input-type">Тип занятия</label>
+            <select class="form-select form-control" id="input-type">
+              <option value="LECTURE">LECTURE</option>
+              <option value="SEMINAR">SEMINAR</option>
+              <option value="PRACTICE">PRACTICE</option>
+              <option value="LABWORK">LABWORK</option>
+              <option value="INDIVIDUAL_LESSON">INDIVIDUAL_LESSON</option>
+              <option value="CONTROL_POINT">CONTROL_POINT</option>
+              <option value="CONSULTATION">CONSULTATION</option>
+              <option value="RESERVATION">RESERVATION</option>
+              <option value="OTHER ">OTHER</option>
+            </select>
 
-          <div class="d-flex flex-row">
-            <label id="label-date-start" class="form-label fw-bold my-3 me-3" for="input-date-start">Дата начала</label>
-            <input id="input-date-start" class="form-control my-3 me-5" type="date" required>
+            <div class="d-flex flex-row">
+              <label id="label-date-start" class="form-label fw-bold my-3 me-3" for="input-date-start"
+                >Дата начала</label
+              >
+              <input id="input-date-start" class="form-control my-3 me-5" type="date" required />
 
-            <label id="label-date-end" class="form-label fw-bold my-3 me-3" for="input-date-end">Дата конца</label>
-            <input id="input-date-end" class="form-control my-3" type="date" required>
+              <label id="label-date-end" class="form-label fw-bold my-3 me-3" for="input-date-end">Дата конца</label>
+              <input id="input-date-end" class="form-control my-3" type="date" required />
+            </div>
+            <div class="border border-danger rounded text-danger d-none error"></div>
           </div>
-          <div class="border border-danger rounded text-danger d-none error"></div>
-        </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button id="create-lesson" type="button" class="btn btn-primary">Save changes</button>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="create-lesson" type="button" class="btn btn-primary">Save changes</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <nav class="navbar navbar-expand navbar-dark nav-bar-unauthorized" id="navbar">
-    <image class="nav-logo mx-3" src="../logos/navbarLogo.png"></image>
-    <a class="navbar-brand" href="mainpage.html">PurrTime</a>
-    <div class="navbar-nav left-side">
-      <a class="nav-link" href="../pages/users.html" id="users">Пользователи</a>
-      <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#group'" id="groups">Группы</a>
-      <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#teacher'" id="teachers">Преподаватели</a>
-      <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#class'" id="classes">Аудитории</a>
-    </div>
-    <div class="navbar-nav ms-auto right-side">
-      <a class="nav-link"  id="nickname"></a>
-      <a class="nav-link" id="signout">&nbsp;Выйти</a>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand navbar-dark nav-bar-unauthorized" id="navbar">
+      <image class="nav-logo mx-3" src="../logos/navbarLogo.png"></image>
+      <a class="navbar-brand" href="mainpage.html">PurrTime</a>
+      <div class="navbar-nav left-side">
+        <a class="nav-link" href="../pages/users.html" id="users">Пользователи</a>
+        <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#group'" id="groups">Группы</a>
+        <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#teacher'" id="teachers"
+          >Преподаватели</a
+        >
+        <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#class'" id="classes">Аудитории</a>
+      </div>
+      <div class="navbar-nav ms-auto right-side">
+        <a class="nav-link" id="nickname"></a>
+        <a class="nav-link" id="signout">&nbsp;Выйти</a>
+      </div>
+    </nav>
 
     <div class="container mt-5 bg-white rounded-2 py-2 pe-4">
       <div class="d-flex justify-content-between align-items-center">
         <div>
-          <h1 id="sch-for">Расписание </h1>
+          <h1 id="sch-for">Расписание</h1>
           <h2 id="date-week" class="text-secondary">27 февраля 2023 - 4 марта 2023</h2>
           <button type="button" class="btn btn-dark my-3 me-3" id="previousWeek">Предыдущая неделя</button>
-          <button type="button" class="btn btn-dark my-3"  id="nextWeek">Слудующая неделя</button>
+          <button type="button" class="btn btn-dark my-3" id="nextWeek">Слудующая неделя</button>
         </div>
         <span class="legend" id="legend" data-toggle="popover" rel="popover" data-bs-custom-class="custom-popover">
           Что означают цвета?
@@ -280,7 +286,14 @@
       </div>
     </div>
 
-    <div class="modal fade" data-bs-backdrop="static" id="edit-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      data-bs-backdrop="static"
+      id="edit-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -291,7 +304,7 @@
             <form>
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Получатель:</label>
-                <input type="text" class="form-control" id="recipient-name">
+                <input type="text" class="form-control" id="recipient-name" />
               </div>
               <div class="mb-3">
                 <label for="message-text" class="col-form-label">Сообщение:</label>
@@ -300,9 +313,9 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-dark justify-content-md-start" >Закрыть</button>
-            <button type="button" class="btn btn-dark bg-danger border-danger" id="del-les-single">Удалить на этой неделе</button>
-            <button type="button" class="btn btn-dark bg-danger border-danger" id="del-les-all">Удалить на каждой неделе</button>
+            <button type="button" class="btn btn-dark justify-content-md-start">Закрыть</button>
+            <button type="button" class="btn del-btn" id="del-les-single">Удалить на этой неделе</button>
+            <button type="button" class="btn del-btn" id="del-les-all">Удалить на каждой неделе</button>
             <div class="border border-danger rounded text-danger d-none error">
               Вы не можете удалить пару которая уже прошла!
             </div>
@@ -311,16 +324,18 @@
       </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-  <script type="module" src="../scripts/shedule.js"></script>
-  <script type="module" src="../scripts/addLesson.js"></script>
+    <script type="module" src="../scripts/shedule.js"></script>
+    <script type="module" src="../scripts/addLesson.js"></script>
   </body>
 </html>
