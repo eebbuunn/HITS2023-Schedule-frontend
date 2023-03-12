@@ -172,18 +172,55 @@ $('#edit-ok-all').click(function (){
 
     console.log(body);
     let id = localStorage.getItem('lessonIdAll')
+    if (checkLessonValidness(body)){
+        put(`http://v1683738.hosted-by-vdsina.ru:5000/lesson/all/${id}`, body)
+            .then(r => {
+                if(!r.ok){
+                    $('.errorr').removeClass('d-none')
+                    return r.text().then(text => {
+                        text = JSON.parse(text)
+                        console.log(text.errors.message)
+                        $('.errorr').text(text.errors.message)
+                    })
+                } else {
+                    window.location.reload()
+                }
+            })
+    }
 
-    put(`http://v1683738.hosted-by-vdsina.ru:5000/lesson/all/${id}`, body)
-        .then(r => {
-            if(!r.ok){
-                $('.errorr').removeClass('d-none')
-                return r.text().then(text => {
-                    text = JSON.parse(text)
-                    console.log(text.errors.message)
-                    $('.errorr').text(text.errors.message)
-                })
-            } else {
-                window.location.reload()
-            }
-        })
 })
+
+function checkLessonValidness(lesson){
+    let valid = true
+    if(lesson.startsAt === ''){
+        $('#input-date-start-edit').addClass('is-invalid')
+        valid = false;
+    } else {
+        $('#input-date-start-edit').removeClass('is-invalid')
+    }
+
+    if(lesson.endsAt === ''){
+        $('#input-date-end-edit').addClass('is-invalid')
+        valid = false;
+    } else {
+        $('#input-date-end-edit').removeClass('is-invalid')
+    }
+
+    if(lesson.groups.length === 0){
+        $('#input-groups-edit').addClass('is-invalid')
+        valid = false;
+    } else {
+        $('#input-groups-edit').removeClass('is-invalid')
+    }
+
+
+    if(lesson.endsAt < lesson.startsAt){
+        $('#input-date-end-edit').addClass('is-invalid')
+        $('#input-date-start-edit').addClass('is-invalid')
+        valid = false;
+    } else {
+        $('#input-date-end-edit').removeClass('is-invalid')
+        $('#input-date-start-edit').removeClass('is-invalid')
+    }
+    return valid
+}

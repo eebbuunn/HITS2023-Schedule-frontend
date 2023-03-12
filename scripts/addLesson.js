@@ -104,6 +104,14 @@ function checkLessonValidness(lesson){
     } else {
         $('#input-groups').removeClass('is-invalid')
     }
+    if(lesson.endsAt < lesson.startsAt){
+        $('#input-date-end').addClass('is-invalid')
+        $('#input-date-start').addClass('is-invalid')
+        valid = false;
+    } else {
+        $('#input-date-end').removeClass('is-invalid')
+        $('#input-date-start').removeClass('is-invalid')
+    }
     return valid
 }
 
