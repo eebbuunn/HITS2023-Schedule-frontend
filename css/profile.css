@@ -53,3 +53,12 @@
   color: black;
   font-size: 18px;
 }
+.error-body {
+  color: rgb(173, 24, 45);
+}
+.error-modal {
+  color: rgb(173, 24, 45);
+}
+.error-header {
+  padding: 10px 16px;
+}
