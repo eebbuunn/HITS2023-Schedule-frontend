@@ -1,4 +1,5 @@
 import {del, get, post} from "./requests.js";
+import { loadSelectors, getFormattedDateTrue} from "./editLesson.js";
 
 let START_DATE
 let END_DATE
@@ -15,6 +16,7 @@ let type = {
 }
 let WEEK_DAY = ['ВАГИНА', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ']
 let MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+export let lessonEdit
 
 $(document).ready(function () {
     navbarChek();
@@ -156,6 +158,15 @@ function getFilledLesson(lesson){
     lessonCard.find(".l-group").text(lesson.lesson.groups);
     lessonCard.find(".lesson-card").attr("idSingle", lesson.id);
     lessonCard.find(".lesson-card").attr("idAll", lesson.lesson.id);
+    lessonCard.find(".lesson-card").attr("teacherId", lesson.lesson.teacher.id);
+    lessonCard.find(".lesson-card").attr('teacherName', lesson.lesson.teacher.name);
+    lessonCard.find(".lesson-card").attr('type', lesson.type);
+    lessonCard.find(".lesson-card").attr('timeSlotId', lesson.timeslot.id);
+    lessonCard.find(".lesson-card").attr('timeSlotStart', lesson.timeslot.startsAt);
+    lessonCard.find(".lesson-card").attr('timeSlotEnd', lesson.timeslot.endsAt);
+    lessonCard.find(".lesson-card").attr('date', lesson.date);
+    lessonCard.find(".lesson-card").attr('groups', lesson.lesson.groups);
+    console.log(lesson.lesson.groups);
     lessonCard.click(function (){
         let idAll = $(this).find(".lesson-card").attr('idAll')
         localStorage.setItem('lessonIdAll', idAll);
@@ -163,9 +174,28 @@ function getFilledLesson(lesson){
         let idSingle = $(this).find(".lesson-card").attr('idSingle')
         localStorage.setItem('lessonIdSingle', idSingle);
         console.log(idSingle)
+        lessonEdit = {
+            teacherID :  $(this).find(".lesson-card").attr('teacherId'),
+            teacherName:  $(this).find(".lesson-card").attr('teacherName'),
+            type:  $(this).find(".lesson-card").attr('type'),
+            timeSlotId: $(this).find(".lesson-card").attr('timeSlotId'),
+            timeSlotStart: $(this).find(".lesson-card").attr(' timeSlotStart'),
+            timeSlotEnd: $(this).find(".lesson-card").attr(' timeSlotEnd'),
+            date: $(this).find(".lesson-card").attr('date'),
+            groups: $(this).find(".l-group").attr('groups'),
+            subject: $(this).find(".l-subject").text(),
+            cabinet: $(this).find(".l-class").text(),
+
+        }
+        loadSelectors(lessonEdit.teacherID, lesson.lesson.groups, lesson.lesson.cabinet.number, lesson.timeslot.id, lesson.lesson.subject);
+        $('#input-type-edit').val(lesson.lesson.type);
+        $("#input-date-cur-edit").val(getFormattedDateTrue(lesson.date));
+        console.log(lesson.date);
     })
+
     lessonCard.addClass(type[lesson.lesson.type])
     return lessonCard;
+
 }
 
 

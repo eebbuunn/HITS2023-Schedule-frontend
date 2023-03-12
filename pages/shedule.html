@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Kameron&display=swap" rel="stylesheet" />
   </head>
   <body class="bg-light">
-  <div id="lesson-template" data-bs-toggle="modal" data-bs-target="#edit-modal" class="d-none card m-2">
+  <div id="lesson-template"  data-bs-toggle="modal" data-bs-target="#edit-modal" class="d-none card m-2">
     <div class="card-body p-2 ps-3 lesson-card">
       <h5 class="l-name card-title fw-bold">Пара нейм</h5>
       <p class="l-class card-subtitle pb-1">Место нейм</p>
@@ -36,11 +36,11 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="create-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="create-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
+          <h5 class="modal-title">Добавление занятия</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -284,23 +284,55 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Новое сообщение</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Редактирование занятия</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
           </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Получатель:</label>
-                <input type="text" class="form-control" id="recipient-name">
-              </div>
-              <div class="mb-3">
-                <label for="message-text" class="col-form-label">Сообщение:</label>
-                <textarea class="form-control" id="message-text"></textarea>
-              </div>
-            </form>
+          <div class="modal-body " >
+            <label id="label-group-edit" class="form-label fw-bold" for="input-subject">Предмет</label>
+            <select class="form-select form-control" disabled id="input-subject-edit"></select>
+
+            <label id="label-teacher-edit" class="form-label fw-bold mt-3" for="input-teacher-id">Имя учителя</label>
+            <select class="form-select form-control" disabled id="input-teacher-id-edit"></select>
+
+            <label id="label-groups-edit" class="form-label fw-bold mt-3" for="input-groups">Группы</label>
+            <select class="form-select form-control" disabled id="input-groups-edit" multiple required></select>
+
+            <label id="label-cabinet-edit" class="form-label fw-bold mt-3" for="input-cabinet">Аудитория</label>
+            <select class="form-select form-control" disabled id="input-cabinet-edit"></select>
+
+            <label id="label-type-edit" class="form-label fw-bold mt-3" for="input-type">Тип занятия</label>
+            <select class="form-select form-control" disabled id="input-type-edit">
+              <option value="LECTURE">LECTURE</option>
+              <option value="SEMINAR">SEMINAR</option>
+              <option value="PRACTICE">PRACTICE</option>
+              <option value="LABWORK">LABWORK</option>
+              <option value="INDIVIDUAL_LESSON">INDIVIDUAL_LESSON</option>
+              <option value="CONTROL_POINT">CONTROL_POINT</option>
+              <option value="CONSULTATION">CONSULTATION</option>
+              <option value="RESERVATION">RESERVATION</option>
+              <option value="OTHER ">OTHER</option>
+            </select>
+
+            <label id="label-timeslot-edit" class="form-label fw-bold mt-3" for="input-type">Время занятия</label>
+            <select class="form-select form-control" disabled id="input-timeslot-edit"></select>
+
+            <div class="d-flex flex-row">
+              <label id="label-date-start-edit" class="form-label fw-bold my-3 me-3" for="input-date-start">Дата начала</label>
+              <input id="input-date-start-edit" disabled class="form-control my-3 me-5" type="date" required>
+
+              <label id="label-date-end-edit" class="form-label fw-bold my-3 me-3" for="input-date-end">Дата конца</label>
+              <input id="input-date-end-edit" disabled class="form-control my-3" type="date" required>
+            </div>
+            <label id="label-date-cur-edit" class="form-label fw-bold  me-3" for="input-date-end">Дата пары</label>
+            <input id="input-date-cur-edit" disabled class="form-control " type="date" required>
+            <div class="border border-danger rounded text-danger d-none errorr"></div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-dark justify-content-md-start" >Закрыть</button>
+            <button type="button" class="btn btn-dark" id="edit-single">Редактировать для этой неделе</button>
+            <button type="button" class="btn btn-dark" id="edit-all">Редактировать для каждой неделе</button>
+            <button type="button" class="btn btn-dark  d-none" id="edit-ok-single">Принять изменения</button>
+            <button type="button" class="btn btn-dark  d-none" id="edit-ok-all">Принять изменения</button>
+            <button type="button" class="btn btn-dark bg-danger border-danger  d-none" id="cancel">Отменить</button>
             <button type="button" class="btn btn-dark bg-danger border-danger" id="del-les-single">Удалить на этой неделе</button>
             <button type="button" class="btn btn-dark bg-danger border-danger" id="del-les-all">Удалить на каждой неделе</button>
             <div class="border border-danger rounded text-danger d-none error">
@@ -322,5 +354,6 @@
     ></script>
   <script type="module" src="../scripts/shedule.js"></script>
   <script type="module" src="../scripts/addLesson.js"></script>
+  <script type="module" src="../scripts/editLesson.js"></script>
   </body>
 </html>
