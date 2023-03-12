@@ -13,7 +13,7 @@ async function loadUsers(roles) {
   });
   const users = await response.json();
   const template = $('#user-template');
-  for (const user of users) {
+  for (const user of users.users) {
     let roles = [];
     for (const role of user.roles) {
       switch (role) {
