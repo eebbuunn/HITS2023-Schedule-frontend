@@ -2,12 +2,16 @@ tr {
   height: 10vh;
 }
 
+.lesson-card > h5, .lesson-card > p, .lesson-card > h6 {
+  font-size: 12px;
+}
+
 thead > tr {
   height: 4vh;
 }
 
 tr > td {
-  width: 15vh;
+  width: 20vh;
 }
 
 .legend:hover {

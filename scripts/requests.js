@@ -57,6 +57,7 @@ function RefreshWhenExpired() {
         let newToken = await response.json();
         localStorage.setItem('userToken', newToken.accessToken);
         localStorage.setItem('refreshUserToken', newToken.refreshToken);
+        window.location.reload()
       }
     })
 }
