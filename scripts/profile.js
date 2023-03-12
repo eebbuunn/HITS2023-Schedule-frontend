@@ -105,7 +105,7 @@ async function editUser(user_id) {
   };
   const response = await put(url, body);
   if (response.ok) {
-    loadProfile(user_id);
+    window.location.reload();
   } else if (response.status == 409) {
     $('#errorModal').find('.modal-body').text('There is already an account for this teacher');
     $('#errorModal').modal('show');
