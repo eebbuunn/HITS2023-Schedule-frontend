@@ -14,12 +14,14 @@ function setDefaultValuesInAdd() {
         let teacher = hash.substring(9)
         $(`#input-teacher-id`).val(teacher)
         $('#input-teacher-id').addClass('d-none')
+        $('#label-teacher').addClass('d-none')
     }
 
     if(hash.includes("#class=")){
         let cabinet = hash.substring(7)
         $(`#input-cabinet`).val(cabinet)
         $('#input-cabinet').addClass('d-none')
+        $('#label-cabinet').addClass('d-none')
     }
 }
 
@@ -60,9 +62,11 @@ $('#create-lesson').click(function (){
         post('http://v1683738.hosted-by-vdsina.ru:5000/lesson', newLesson)
             .then(r => {
                 if(!r.ok){
-                    $('#error').removeClass('d-none')
-                    return response.text().then(text => {
-                        $('#error').text(JSON.parse(text).error);
+                    $('.error').removeClass('d-none')
+                    return r.text().then(text => {
+                        text = JSON.parse(text)
+                        console.log(text.errors.message)
+                        $('.error').text(text.errors.message)
                     })
                 } else {
                     window.location.reload()

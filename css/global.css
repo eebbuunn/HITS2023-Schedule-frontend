@@ -37,10 +37,13 @@ body {
   margin: 0px 20px 0px 0px;
 }
 
-.nav-logo{
+.nav-logo {
   margin: 0px 10px 0px 40px;
 }
 
 .right-side {
   margin-right: 20px;
+}
+.nav-link {
+  cursor: pointer;
 }

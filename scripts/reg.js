@@ -27,6 +27,7 @@ $("#button-register").click(function (){
 })
 
 function CheckValidation(){
+    let flag = true
     $('#error').addClass('d-none')
     let login = $('#input-login').val()
     let loginExp = /[a-zA-z]+\w*/
@@ -34,13 +35,20 @@ function CheckValidation(){
         $('#input-login').removeClass('is-invalid')
     } else {
         $('#input-login').addClass('is-invalid')
-        return false
+        flag = false
+    }
+
+    if($('#input-role').val().length !== 0){
+        $('#input-role').removeClass('is-invalid')
+    } else {
+        $('#input-role').addClass('is-invalid')
+        flag = false
     }
 
   let password = $('#input-password').val();
   if (password.length < 6) {
     $('#input-password').addClass('is-invalid');
-    return false;
+    flag = false;
   } else {
     $('#input-password').removeClass('is-invalid');
   }
@@ -48,7 +56,7 @@ function CheckValidation(){
     let confirm = $('#input-confirm').val();
     if (confirm !== password) {
         $('#input-confirm').addClass('is-invalid');
-        return false;
+        flag = false;
     } else {
         $('#input-confirm').removeClass('is-invalid');
     }
@@ -59,14 +67,14 @@ function CheckValidation(){
   if(group === "" && roles.includes("STUDENT") || group !== "" && !roles.includes("STUDENT")){
       $('#error').removeClass('d-none')
       $('#error').text("Должны быть выбранны оба поля 'номер группы' и 'роль студент'")
-      return false
+      flag = false
   }
     if(teacher === "" && roles.includes("TEACHER") || teacher !== "" && !roles.includes("TEACHER")){
         $('#error').removeClass('d-none')
         $('#error').text("Должны быть выбранны оба поля 'Имя учителя' и 'роль учитель'")
-        return false
+        flag = false
     }
-    return true
+    return flag
 }
 
 function fillTeachersAndGroups(){
@@ -120,7 +128,8 @@ function registerUser(requestsBody){
             else{
                 $('#error').removeClass('d-none')
                 return response.text().then(text => {
-                    $('#error').text(JSON.parse(text).error);
+                    text = JSON.parse(text)
+                    $('#error').text(text.errors.message)
                 })
             }
         })
