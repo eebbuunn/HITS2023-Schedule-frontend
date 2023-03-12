@@ -16,6 +16,7 @@ async function deleteUser(user_id) {
 }
 
 function fillGroups(group_number) {
+  $('#input-group').empty();
   get('http://v1683738.hosted-by-vdsina.ru:5000/groups').then((r) => {
     r.groups.forEach((group) => {
       if (group !== group_number) {
@@ -31,6 +32,7 @@ function fillGroups(group_number) {
   });
 }
 function fillTeachers(teacher_id) {
+  $('#input-teacher').empty();
   get('http://v1683738.hosted-by-vdsina.ru:5000/teachers').then((r) => {
     r.teachers.forEach((teacher) => {
       if (teacher.id !== teacher_id) {
@@ -50,6 +52,11 @@ async function loadProfile(user_id) {
   const user = await get(url);
   let block = $('#profile-template');
   block.find('#profile-nickname').text(user.login);
+  if (user.avatarLink !== null && user.avatarLink !== '') {
+    block.find('#input-avatar-link').val(user.avatarLink);
+    block.find('#profile-image ').attr('src', user.avatarLink);
+  }
+
   for (const role of user.roles) {
     switch (role) {
       case 'STUDENT':
@@ -71,6 +78,9 @@ async function loadProfile(user_id) {
     }
   }
   block.removeClass('d-none');
+  $('#profile-image').on('error', function () {
+    $('#profile-image').attr('src', '../logos/user.svg');
+  });
 }
 async function editUser(user_id) {
   const url = 'http://v1683738.hosted-by-vdsina.ru:5000/users/' + user_id;
@@ -78,19 +88,36 @@ async function editUser(user_id) {
   $('input:checkbox[name=checkbox]:checked').each(function () {
     roles.push($(this).val());
   });
-  const group = $('#input-group').val();
-  const teacher_id = $('#input-teacher').val();
+  let group = null;
+  let teacher_id = null;
+  if (roles.includes('STUDENT')) {
+    group = $('#input-group').val();
+  }
+  if (roles.includes('TEACHER')) {
+    teacher_id = $('#input-teacher').val();
+  }
+  const avatarLink = $('#input-avatar-link').val();
   const body = {
     roles: roles,
     teacherId: teacher_id,
     group: Number(group),
+    avatar: avatarLink,
   };
   const response = await put(url, body);
   if (response.ok) {
     loadProfile(user_id);
+  } else if (response.status == 409) {
+    $('#errorModal').find('.modal-body').text('There is already an account for this teacher');
+    $('#errorModal').modal('show');
   } else {
     response.text().then((text) => {
-      $('#errorModal').find('.modal-body').text(JSON.parse(text).errors.message);
+      if (
+        JSON.parse(text).errors.Roles == "The field Roles must be a string or array type with a minimum length of '1'."
+      ) {
+        $('#errorModal').find('.modal-body').text('You cannot create a user without roles');
+      } else {
+        $('#errorModal').find('.modal-body').text(JSON.parse(text).errors.message);
+      }
       $('#errorModal').modal('show');
     });
   }
@@ -102,6 +129,7 @@ $(document).ready(function () {
   $('#studentCheck').change(function () {
     if ($('#studentCheck').prop('checked')) {
       $('.input-group-container').removeClass('d-none');
+      fillGroups(null);
     } else {
       $('.input-group-container').addClass('d-none');
     }
@@ -109,6 +137,7 @@ $(document).ready(function () {
   $('#teacherCheck').change(function () {
     if ($('#teacherCheck').prop('checked')) {
       $('.input-teacher-container').removeClass('d-none');
+      fillTeachers(null);
     } else {
       $('.input-teacher-container').addClass('d-none');
     }

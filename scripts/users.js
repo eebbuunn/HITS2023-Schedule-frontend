@@ -35,6 +35,9 @@ async function loadUsers(roles) {
     block.find('.user-login').text(user.login);
     block.attr('user-id', user.id);
     block.find('.user-role').text(user.role);
+    if (user.avatarLink !== null && user.avatarLink !== '') {
+      block.find('.user-avatar').attr('src', user.avatarLink);
+    }
     if (user.group != null) {
       block.find('.user-group').text(user.group);
     } else {
@@ -45,6 +48,12 @@ async function loadUsers(roles) {
     if (roles.length > 0) {
       $('#users-container').append(block);
     }
+  }
+  const images = document.getElementsByClassName('user-avatar');
+  for (const img of images) {
+    img.onerror = function () {
+      img.src = '../logos/user.svg';
+    };
   }
 }
 
