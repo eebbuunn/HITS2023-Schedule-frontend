@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Kameron&display=swap" rel="stylesheet" />
   </head>
   <body class="bg-light">
-  <div id="lesson-template" data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-none card m-2">
+  <div id="lesson-template" data-bs-toggle="modal" data-bs-target="#edit-modal" class="d-none card m-2">
     <div class="card-body p-2 ps-3 lesson-card">
       <h5 class="l-name card-title fw-bold">Пара нейм</h5>
       <p class="l-class card-subtitle pb-1">Место нейм</p>
@@ -30,17 +30,17 @@
      font-size: 52px;
      color: #00615d;
      border: 1px solid #00615d;
-     vertical-align: 24px" data-bs-toggle="modal" data-bs-target="#exampleModal">
+     vertical-align: 24px" data-bs-toggle="modal" data-bs-target="#create-modal">
       +
     </button>
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="create-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title">Modal title</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -107,7 +107,7 @@
             <label id="label-date-end" class="form-label fw-bold my-3 me-3" for="input-date-end">Дата конца</label>
             <input id="input-date-end" class="form-control my-3" type="date" required>
           </div>
-          <div class="border border-danger rounded text-danger d-none" id="error"></div>
+          <div class="border border-danger rounded text-danger d-none error"></div>
         </div>
 
         <div class="modal-footer">
@@ -280,7 +280,7 @@
       </div>
     </div>
 
-    <div class="modal fade" data-bs-backdrop="static" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" data-bs-backdrop="static" id="edit-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -303,7 +303,7 @@
             <button type="button" class="btn btn-dark justify-content-md-start" >Закрыть</button>
             <button type="button" class="btn btn-dark bg-danger border-danger" id="del-les-single">Удалить на этой неделе</button>
             <button type="button" class="btn btn-dark bg-danger border-danger" id="del-les-all">Удалить на каждой неделе</button>
-            <div class="border border-danger rounded text-danger d-none" id="error">
+            <div class="border border-danger rounded text-danger d-none error">
               Вы не можете удалить пару которая уже прошла!
             </div>
           </div>
