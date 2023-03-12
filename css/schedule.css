@@ -32,3 +32,9 @@ tr > td {
   --bs-popover-border-width: 1px;
   --bs-popover-border-color: var(--main-color);
 }
+
+#error {
+  margin: 0px 20px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  background-color: rgba(255, 0, 0, 0.1);
+}

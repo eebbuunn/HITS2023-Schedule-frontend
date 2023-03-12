@@ -13,7 +13,6 @@ let type = {
     RESERVATION: "booking_bg_color",
     OTHER : "other_bg_color"
 }
-let WEEK_DAY = ['ВАГИНА', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ']
 let MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
 
 $(document).ready(function () {
@@ -48,7 +47,9 @@ function loadForTeacher(id){
     get('http://v1683738.hosted-by-vdsina.ru:5000/timeslots')
         .then(r => {
             timeslots = r.timeslots;
+            timeslots.sort(compareTimeslots)
         })
+        .then(() => {
 
     get(`http://v1683738.hosted-by-vdsina.ru:5000/teachers/${id}/schedule?startsAt=${getDateForUrl(START_DATE)}&endsAt=${getDateForUrl(END_DATE)}`)
         .then(r => {
@@ -62,6 +63,8 @@ function loadForTeacher(id){
                 }
 
                 let lessonDate = new Date(l.date);
+                START_DATE.setHours(0, 0, 0, 0)
+                lessonDate.setHours(0, 0, 0, 0)
                 let timeDiff = Math.abs(lessonDate - START_DATE);
                 let daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
                 let cell = slotIndex * 6 + daysDiff;
@@ -70,8 +73,7 @@ function loadForTeacher(id){
                 $(`#c${cell}`).append(lessonCard);
             });
             console.log("aaaaa chleeen")
-        })
-    //todo: не инициализируется timeslots из за шайтана
+        })})
 }
 
 function loadForGroup(number){
@@ -81,8 +83,9 @@ function loadForGroup(number){
     get('http://v1683738.hosted-by-vdsina.ru:5000/timeslots')
         .then(r => {
             timeslots = r.timeslots;
+            timeslots.sort(compareTimeslots)
         })
-
+        .then(() => {
     get(`http://v1683738.hosted-by-vdsina.ru:5000/groups/${number}/schedule?startsAt=${getDateForUrl(START_DATE)}&endsAt=${getDateForUrl(END_DATE)}`)
         .then(r => {
             r.lessons.forEach(l => {
@@ -95,6 +98,8 @@ function loadForGroup(number){
                 }
 
                 let lessonDate = new Date(l.date);
+                START_DATE.setHours(0, 0, 0, 0)
+                lessonDate.setHours(0, 0, 0, 0)
                 let timeDiff = Math.abs(lessonDate - START_DATE);
                 let daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
                 let cell = slotIndex * 6 + daysDiff;
@@ -102,7 +107,7 @@ function loadForGroup(number){
                 let lessonCard = getFilledLesson(l)
                 $(`#c${cell}`).append(lessonCard);
 
-            });
+            })});
         })
 }
 
@@ -113,8 +118,9 @@ function loadForClass(number){
     get('http://v1683738.hosted-by-vdsina.ru:5000/timeslots')
         .then(r => {
             timeslots = r.timeslots;
+            timeslots.sort(compareTimeslots)
         })
-
+        .then(() => {
     get(`http://v1683738.hosted-by-vdsina.ru:5000/cabinets/${number}/schedule?startsAt=${getDateForUrl(START_DATE)}&endsAt=${getDateForUrl(END_DATE)}`)
         .then(r => {
             r.lessons.forEach(l => {
@@ -127,13 +133,15 @@ function loadForClass(number){
                 }
 
                 let lessonDate = new Date(l.date);
+                START_DATE.setHours(0, 0, 0, 0)
+                lessonDate.setHours(0, 0, 0, 0)
                 let timeDiff = Math.abs(lessonDate - START_DATE);
                 let daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
                 let cell = slotIndex * 6 + daysDiff;
 
                 let lessonCard = getFilledLesson(l)
                 $(`#c${cell}`).append(lessonCard);
-            });
+            })});
         })
 }
 
@@ -202,11 +210,9 @@ function setDateWeek(){
     }
     // let dateEnd = new Date();
     // let dateStart = new Date();
-    console.log(dateStart, dateEnd);
     let weekDay = dateStart.getDay();
     dateStart.setDate(dateStart.getDate() - weekDay + 1)
     dateEnd.setDate(dateEnd.getDate() - weekDay + 6)
-    console.log(dateStart, dateEnd);
 
     START_DATE = dateStart
     END_DATE = dateEnd
@@ -221,7 +227,6 @@ function setDateWeek(){
 
     dateStart = getFormattedDate(dateStart)
     dateEnd = getFormattedDate(dateEnd)
-    console.log(dateStart, dateEnd);
 
     $('#date-week').text(`${dateStart} - ${dateEnd}`)
 }
@@ -281,3 +286,13 @@ $("#previousWeek").click(function (){
     // localStorage.setItem('endDate', END_DATE);
     window.location.reload();
 })
+
+function compareTimeslots( a, b ) {
+    if ( a.startAt < b.startAt ){
+        return -1;
+    }
+    if ( a.startAt > b.startAt ){
+        return 1;
+    }
+    return 0;
+}

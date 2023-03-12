@@ -3,7 +3,7 @@ let ROLES
 
 $(document).ready(function () {
     navbarChek()
-    fillTeachers()
+    fillTeachersAndGroups()
     //todo: fill groups
 });
 
@@ -30,7 +30,7 @@ function CheckValidation(){
     $('#error').addClass('d-none')
     let login = $('#input-login').val()
     let loginExp = /[a-zA-z]+\w*/
-    if(loginExp.test(login) && login.length >= 5){
+    if(loginExp.test(login) && login.length >= 6){
         $('#input-login').removeClass('is-invalid')
     } else {
         $('#input-login').addClass('is-invalid')
@@ -69,12 +69,22 @@ function CheckValidation(){
     return true
 }
 
-function fillTeachers(){
+function fillTeachersAndGroups(){
     get('http://v1683738.hosted-by-vdsina.ru:5000/teachers')
         .then(r => {
-            r.forEach(teacher => {
+            r.teachers.forEach(teacher => {
                 $('#input-teacher-id').append(`<option value="${teacher.id}">
                                        ${teacher.name}
+                                  </option>`)
+                }
+            );
+        })
+
+    get('http://v1683738.hosted-by-vdsina.ru:5000/groups')
+        .then(r => {
+            r.groups.forEach(g => {
+                    $('#input-group-id').append(`<option value="${g}">
+                                       ${g}
                                   </option>`)
                 }
             );
@@ -86,7 +96,7 @@ function navbarChek(){
         .then(profile => {
             $("#navbar").find("#nickname").text(profile.login);
             ROLES = profile.roles;
-            if(!profile.roles.includes(4)){
+            if(!profile.roles.includes("ROOT")){
                 $("#input-role option[value='3']").remove();
             }
             $("#signout").click(() => {

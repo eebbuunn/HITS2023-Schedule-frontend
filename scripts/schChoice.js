@@ -46,8 +46,9 @@ function loadSelectors(){
     get('http://v1683738.hosted-by-vdsina.ru:5000/cabinets')
         .then(r => {
             r.cabinets.forEach(cabinet => {
+                    let name = cabinet.name === null ? cabinet.number : cabinet.name
                     $('#input-class').append(`<option value="${cabinet.number}">
-                                       ${cabinet.number}
+                                       ${name}
                                   </option>`)
                 }
             );
