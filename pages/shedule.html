@@ -278,9 +278,9 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-dark justify-content-md-start" >Закрыть</button>
-            <button type="button" class="btn btn-dark bg-danger border-danger" id="del-les-single">Удалить на этой неделе</button>
-            <button type="button" class="btn btn-dark bg-danger border-danger" id="del-les-all">Удалить на каждой неделе</button>
+            <button type="button" class="btn btn-dark justify-content-md-start">Закрыть</button>
+            <button type="button" class="btn del-btn" id="del-les-single">Удалить на этой неделе</button>
+            <button type="button" class="btn del-btn" id="del-les-all">Удалить на каждой неделе</button>
             <div class="border border-danger rounded text-danger d-none error">
               Вы не можете удалить пару которая уже прошла!
             </div>
@@ -289,16 +289,18 @@
       </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-  <script type="module" src="../scripts/shedule.js"></script>
-  <script type="module" src="../scripts/addLesson.js"></script>
+    <script type="module" src="../scripts/shedule.js"></script>
+    <script type="module" src="../scripts/addLesson.js"></script>
   </body>
 </html>

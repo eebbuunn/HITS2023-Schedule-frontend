@@ -36,53 +36,48 @@
   </nav>
 
     <main class="container p-4">
-      <div class="row bg-white p-3 rounded-3 gy-4 mt-3" data-id="" nickName="" id="profile-template">
+      <div class="row bg-white p-3 rounded-3 gy-4 mt-3 d-none" data-id="" nickName="" id="profile-template">
         <div class="col-8 col-sm-7 mx-auto col-md-5 col-lg-4">
-          <img class="profile-image img-fluid rounded-3" alt="Profile Image" src="../logos/user.svg" />
+          <img
+            class="profile-image img-fluid rounded-3"
+            id="profile-image"
+            alt="Profile Image"
+            src="../logos/user.svg"
+          />
         </div>
         <div class="col-12 col-lg-8">
           <form class="row">
             <div class="col-12">
-              <h1 class="profile-nickname">NickName</h1>
+              <h1 class="profile-nickname" id="profile-nickname">NickName</h1>
             </div>
             <div class="col-12">
               <label for="input-roles" class="form-label fw-bold">Роли</label>
               <div class="input-roles checkboxes">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="checkbox" value="0" id="studentCheck" />
+                  <input class="form-check-input" type="checkbox" name="checkbox" value="STUDENT" id="studentCheck" />
                   <label class="form-check-label" for="studentCheck">Студент</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="checkbox" value="1" id="teacherCheck" />
+                  <input class="form-check-input" type="checkbox" name="checkbox" value="TEACHER" id="teacherCheck" />
                   <label class="form-check-label" for="teacherCheck">Преподаватель</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="checkbox" value="2" id="editorCheck" />
+                  <input class="form-check-input" type="checkbox" name="checkbox" value="EDITOR" id="editorCheck" />
                   <label class="form-check-label" for="editorCheck">Редактор</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="checkbox" value="3" id="adminCheck" />
+                  <input class="form-check-input" type="checkbox" name="checkbox" value="ADMIN" id="adminCheck" />
                   <label class="form-check-label" for="adminCheck">Администратор</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="checkbox" value="3" id="rootCheck" />
-                  <label class="form-check-label" for="rootCheck">Root</label>
                 </div>
               </div>
             </div>
-            <div class="col-12 pt-2">
+            <div class="col-12 pt-2 input-group-container d-none">
               <label for="input-group" class="form-label fw-bold">Группа</label>
-              <select class="form-select" aria-label="Default select example">
-                <option selected value="0">972103</option>
-                <option value="1">972203</option>
-              </select>
+              <select class="form-select" aria-label="Default select example" id="input-group"></select>
             </div>
-            <div class="col-12 pt-2">
+            <div class="col-12 pt-2 input-teacher-container d-none">
               <label for="input-teacher" class="form-label fw-bold">Преподаватель</label>
-              <select class="form-select" aria-label="Default select example">
-                <option selected value="0">Amogus Ballser</option>
-                <option value="1">Name Name Teacher</option>
-              </select>
+              <select class="form-select" aria-label="Default select example" id="input-teacher"></select>
             </div>
             <div class="col-12 pt-2">
               <label for="input-avatar-link" class="form-label fw-bold">Ссылка на аватар</label>
@@ -94,11 +89,30 @@
                 Удалить пользователя
               </button>
             </div>
+            <div class="text-danger mb-1 error d-none control_bg_color" id="error"></div>
           </form>
         </div>
       </div>
       <div id="profile-container"></div>
     </main>
+    <!-- Модальное окно -->
+    <div
+      class="modal error-modal fade"
+      id="errorModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header error-header">
+            <h5 class="modal-title" id="errorModalLabel">Error</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+          </div>
+          <div class="modal-body error-body"></div>
+        </div>
+      </div>
+    </div>
     <div class="modal" id="deleteModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">

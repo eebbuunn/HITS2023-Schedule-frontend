@@ -18,39 +18,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Kameron&display=swap" rel="stylesheet" />
   </head>
   <body class="bg-light">
-  <nav class="navbar navbar-expand navbar-dark nav-bar-unauthorized" id="navbar">
-    <image class="nav-logo mx-3" src="../logos/navbarLogo.png"></image>
-    <a class="navbar-brand" href="mainpage.html">PurrTime</a>
-    <div class="navbar-nav left-side">
-      <a class="nav-link" href="../pages/users.html" id="users">Пользователи</a>
-      <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#group'" id="groups">Группы</a>
-      <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#teacher'" id="teachers">Преподаватели</a>
-      <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#class'" id="classes">Аудитории</a>
-    </div>
-    <div class="navbar-nav ms-auto right-side">
-      <a class="nav-link"  id="nickname"></a>
-      <a class="nav-link" id="signout">&nbsp;Выйти</a>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand navbar-dark nav-bar-unauthorized" id="navbar">
+      <image class="nav-logo mx-3" src="../logos/navbarLogo.png"></image>
+      <a class="navbar-brand" href="mainpage.html">PurrTime</a>
+      <div class="navbar-nav left-side">
+        <a class="nav-link" href="../pages/users.html" id="users">Пользователи</a>
+        <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#group'" id="groups">Группы</a>
+        <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#teacher'" id="teachers"
+          >Преподаватели</a
+        >
+        <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#class'" id="classes">Аудитории</a>
+      </div>
+      <div class="navbar-nav ms-auto right-side">
+        <a class="nav-link" id="nickname"></a>
+        <a class="nav-link" id="signout">&nbsp;Выйти</a>
+      </div>
+    </nav>
 
-    <div class="container mt-5 bg-white rounded-2 py-1 pe-4">
-      <form id = "register-form" class="ms-3 mt-3">
-        <div class="mb-3">
+    <div class="container reg-container mt-5 bg-white rounded-3 py-1 pe-4">
+      <form id="register-form" class="row">
+        <div class="mb-3 col-sm-6 me-1">
           <label for="input-login" class="form-label fw-bold">Логин *</label>
           <input type="text" class="form-control" id="input-login" required />
           <div id="login-invalid" class="invalid-feedback">Логин должен быть длинее 5 символов</div>
         </div>
-        <div class="col-md col-12 mb-3">
+        <div class="col-sm-6 mb-3">
           <label for="input-password" class="form-label fw-bold">Пароль *</label>
           <input type="password" class="form-control" id="input-password" required />
           <div id="password-invalid" class="invalid-feedback">Пароль должен быть длинее 5 символов</div>
         </div>
-        <div class="col-md col-12 mb-3">
+        <div class="col-sm-6 mb-3">
           <label for="input-confirm" class="form-label fw-bold">Подтвердите пароль *</label>
           <input type="password" class="form-control" id="input-confirm" required />
           <div id="confirm-invalid" class="invalid-feedback">Несовпадение паролей</div>
         </div>
-        <div id="teacher-div" class="mb-3">
+        <div id="teacher-div" class="mb-3 col-sm-6">
           <div class="col">
             <label id="label-teacher" class="form-label fw-bold" for="input-teacher-id">Имя учителя</label>
             <select class="form-select form-control" id="input-teacher-id">
@@ -58,7 +60,7 @@
             </select>
           </div>
         </div>
-        <div id="group-div" class="mb-3">
+        <div id="group-div" class="mb-3 col-sm-6">
           <div class="col">
             <label id="label-group" class="form-label fw-bold" for="input-group-id">Номер группы</label>
             <select class="form-select form-control" id="input-group-id">
@@ -77,17 +79,18 @@
             </select>
           </div>
         </div>
-        <div class="text-danger mb-1 d-none" id="error">
-         Ошибка регистрации
-        </div>
-        <button id="button-register" type="button" class="btn btn-dark">Зарегистрировать</button>
+        <div class="text-danger mb-1 d-none" id="error">Ошибка регистрации</div>
+        <button id="button-register" type="button" class="btn btn-dark mb-3 col-sm-4 ms-3 col-9">
+          Зарегистрировать
+        </button>
       </form>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-            integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     ></script>
     <script
       src="https://cdn.misdeliver.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
