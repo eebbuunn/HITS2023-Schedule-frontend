@@ -10,7 +10,7 @@ $(document).ready(function () {
 $("#button-register").click(function (){
     if(CheckValidation()) {
         let roles = $('#input-role').val()
-        roles = roles.map(Number);
+        // roles = roles.map(Number);
         let group = $("#input-group-id").val()
         let teacher = $("#input-teacher-id").val()
         group = group === "" ? null : group
@@ -56,12 +56,12 @@ function CheckValidation(){
   let teacher = $('#input-teacher-id').val();
   let group = $('#input-group-id').val();
   let roles = $('#input-role').val();
-  if(group === "" && roles.includes("0") || group !== "" && !roles.includes("0")){
+  if(group === "" && roles.includes("STUDENT") || group !== "" && !roles.includes("STUDENT")){
       $('#error').removeClass('d-none')
       $('#error').text("Должны быть выбранны оба поля 'номер группы' и 'роль студент'")
       return false
   }
-    if(teacher === "" && roles.includes("1") || teacher !== "" && !roles.includes("1")){
+    if(teacher === "" && roles.includes("TEACHER") || teacher !== "" && !roles.includes("TEACHER")){
         $('#error').removeClass('d-none')
         $('#error').text("Должны быть выбранны оба поля 'Имя учителя' и 'роль учитель'")
         return false
@@ -97,7 +97,7 @@ function navbarChek(){
             $("#navbar").find("#nickname").text(profile.login);
             ROLES = profile.roles;
             if(!profile.roles.includes("ROOT")){
-                $("#input-role option[value='3']").remove();
+                $("#input-role option[value='ADMIN']").remove();
             }
             $("#signout").click(() => {
                 post(`http://v1683738.hosted-by-vdsina.ru:5000/auth/logout`)
@@ -107,7 +107,6 @@ function navbarChek(){
                         window.location.href = '../pages/login.html'
                     });
             })
-            // todo добавить обработку ролей
             localStorage.setItem("userId", profile.id);
         })
 }
