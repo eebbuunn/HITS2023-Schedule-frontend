@@ -38,7 +38,7 @@
         <div class="mb-3">
           <label for="input-login" class="form-label fw-bold">Логин *</label>
           <input type="text" class="form-control" id="input-login" required />
-          <div id="login-invalid" class="invalid-feedback">Логин должен быть длинее 4 символов</div>
+          <div id="login-invalid" class="invalid-feedback">Логин должен быть длинее 5 символов</div>
         </div>
         <div class="col-md col-12 mb-3">
           <label for="input-password" class="form-label fw-bold">Пароль *</label>
@@ -70,10 +70,10 @@
           <div class="col">
             <label id="label-role" class="form-label fw-bold" for="input-role">Роли пользователя</label>
             <select class="form-select form-control" id="input-role" required multiple>
-              <option value="0">Студент</option>
-              <option value="1">Учитель</option>
-              <option value="2">Реадктор</option>
-              <option value="3">Админ</option>
+              <option value="STUDENT">Студент</option>
+              <option value="TEACHER">Учитель</option>
+              <option value="EDITOR">Реадктор</option>
+              <option value="ADMIN">Админ</option>
             </select>
           </div>
         </div>
