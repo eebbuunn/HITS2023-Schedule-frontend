@@ -18,8 +18,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Kameron&display=swap" rel="stylesheet" />
   </head>
   <body class="bg-light">
-  <div id="lesson-template" class="d-none card m-2">
-    <div class="card-body p-2 ps-3">
+  <div id="lesson-template" data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-none card m-2">
+    <div class="card-body p-2 ps-3 lesson-card">
       <h5 class="l-name card-title fw-bold">Пара нейм</h5>
       <p class="l-class card-subtitle pb-1">Место нейм</p>
       <h6 class="l-group card-text">группа нейм</h6>
@@ -144,13 +144,28 @@
             <td id="c29"></td>
           </tr>
           <tr>
-            <th></th>
+            <th>
+              <p class="text-center h6">18:25</p>
+              <p class="text-center text-secondary h6">20:00</p>
+            </th>
             <td id="c30"></td>
             <td id="c31"></td>
             <td id="c32"></td>
             <td id="c33"></td>
             <td id="c34"></td>
             <td id="c35"></td>
+          </tr>
+          <tr>
+            <th>
+              <p class="text-center h6">20:15</p>
+              <p class="text-center text-secondary h6">21:50</p>
+            </th>
+            <td id="c36"></td>
+            <td id="c37"></td>
+            <td id="c38"></td>
+            <td id="c39"></td>
+            <td id="c40"></td>
+            <td id="c41"></td>
           </tr>
         </tbody>
       </table>
@@ -169,6 +184,34 @@
         <div class="tag control_bg_color"><span>Дифф. зачёт</span></div>
         <div class="tag consultation_bg_color"><span>Консультация</span></div>
         <div class="tag booking_bg_color"><span>Бронь</span></div>
+      </div>
+    </div>
+
+    <div class="modal fade" data-bs-backdrop="static" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Новое сообщение</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Получатель:</label>
+                <input type="text" class="form-control" id="recipient-name">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">Сообщение:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark justify-content-md-start" >Закрыть</button>
+            <button type="button" class="btn btn-dark bg-danger border-danger" id="del-les-single">Удалить на этой неделе</button>
+            <button type="button" class="btn btn-dark bg-danger border-danger" id="del-les-all">Удалить на каждой неделе</button>
+          </div>
+        </div>
       </div>
     </div>
 

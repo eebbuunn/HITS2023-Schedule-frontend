@@ -1,4 +1,4 @@
-import { get, post } from "./requests.js";
+import {del, get, post} from "./requests.js";
 
 let START_DATE
 let END_DATE
@@ -143,6 +143,16 @@ function getFilledLesson(lesson){
     lessonCard.find(".l-class").text(lesson.lesson.cabinet.number);
     lessonCard.find(".l-name").text(lesson.lesson.subject)
     lessonCard.find(".l-group").text(lesson.lesson.groups);
+    lessonCard.find(".lesson-card").attr("idSingle", lesson.id);
+    lessonCard.find(".lesson-card").attr("idAll", lesson.lesson.id);
+    lessonCard.click(function (){
+        let idAll = $(this).find(".lesson-card").attr('idAll')
+        localStorage.setItem('lessonIdAll', idAll);
+        console.log(idAll)
+        let idSingle = $(this).find(".lesson-card").attr('idSingle')
+        localStorage.setItem('lessonIdSingle', idSingle);
+        console.log(idSingle)
+    })
     lessonCard.addClass(type[lesson.lesson.type])
     return lessonCard;
 }
@@ -278,4 +288,32 @@ $("#previousWeek").click(function (){
     localStorage.setItem('startDate', START_DATE);
     // localStorage.setItem('endDate', END_DATE);
     window.location.reload();
+})
+
+$("#del-les-single").click(function (){
+    let id = localStorage.getItem('lessonIdSingle')
+    del(`http://v1683738.hosted-by-vdsina.ru:5000/lesson/single/${id}`)
+        .then(r => {
+            if (r.status == 204){
+                window.location.reload();
+            }
+            else {
+                let json = r.json();
+                console.log(json);
+            }
+        })
+})
+
+$("#del-les-all").click(function (){
+    let id = localStorage.getItem('lessonIdAll')
+    del(`http://v1683738.hosted-by-vdsina.ru:5000/lesson/all/${id}`)
+        .then(r => {
+            if (r.status == 204){
+                window.location.reload();
+            }
+            else {
+                let json = r.json();
+                console.log(json);
+            }
+        })
 })
