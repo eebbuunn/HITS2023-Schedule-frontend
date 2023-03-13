@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>PurrTime</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/schedule.css" />
+    <link rel="stylesheet" href="../css/colors.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kameron&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-light">
+  <div id="lesson-template"  data-bs-toggle="modal" data-bs-target="#edit-modal" class="d-none card m-2">
+    <div class="card-body p-2 ps-3 lesson-card">
+      <h5 class="l-name card-title  fw-bold">Пара нейм</h5>
+      <p class="l-class card-subtitle ">Место нейм</p>
+      <h6 class="l-group card-text pt-1">группа нейм</h6>
+    </div>
+  </div>
+  <div id="add-template" class="button-add d-none d-flex align-items-center" style="height: 85px">
+    <button id='button-add-lesson' class="btn w-100 btn-dark my-2 bg-white" style="
+            color: #00615d;
+            height: 50px;
+            border: 1px solid #00615d
+            " data-bs-toggle="modal" data-bs-target="#create-modal">
+      +
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="create-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Добавление занятия</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label id="label-group" class="form-label fw-bold" for="input-subject">Предмет</label>
+          <select class="form-select form-control" id="input-subject"></select>
+
+          <label id="label-teacher" class="form-label fw-bold mt-3" for="input-teacher-id">Имя учителя</label>
+          <select class="form-select form-control" id="input-teacher-id"></select>
+
+          <label id="label-groups" class="form-label fw-bold mt-3" for="input-groups">Группы</label>
+          <select class="form-select form-control" id="input-groups" multiple required></select>
+
+          <label id="label-cabinet" class="form-label fw-bold mt-3" for="input-cabinet">Аудитория</label>
+          <select class="form-select form-control" id="input-cabinet"></select>
+
+          <label id="label-type" class="form-label fw-bold mt-3" for="input-type">Тип занятия</label>
+          <select class="form-select form-control" id="input-type">
+            <option value="LECTURE">LECTURE</option>
+            <option value="SEMINAR">SEMINAR</option>
+            <option value="PRACTICE">PRACTICE</option>
+            <option value="LABWORK">LABWORK</option>
+            <option value="INDIVIDUAL_LESSON">INDIVIDUAL_LESSON</option>
+            <option value="CONTROL_POINT">CONTROL_POINT</option>
+            <option value="CONSULTATION">CONSULTATION</option>
+            <option value="RESERVATION">RESERVATION</option>
+            <option value="OTHER">OTHER</option>
+          </select>
+
+          <div class="d-flex flex-row">
+            <label id="label-date-start" class="form-label fw-bold my-3 me-3" for="input-date-start">Дата начала</label>
+            <input id="input-date-start" class="form-control my-3 me-5" type="date" required>
+
+            <label id="label-date-end" class="form-label fw-bold my-3 me-3" for="input-date-end">Дата конца</label>
+            <input id="input-date-end" class="form-control my-3" type="date" required>
+          </div>
+          <div class="border border-danger rounded text-danger error d-none w-100"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+          <button id="create-lesson" type="button" class="btn btn-primary">Добавить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand navbar-dark nav-bar-unauthorized" id="navbar">
+    <image class="nav-logo mx-3" src="../logos/navbarLogo.png"></image>
+    <a class="navbar-brand" href="mainpage.html">PurrTime</a>
+    <div class="navbar-nav left-side">
+      <a class="nav-link" href="../pages/users.html" id="users">Пользователи</a>
+      <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#group'" id="groups">Группы</a>
+      <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#teacher'" id="teachers">Преподаватели</a>
+      <a class="nav-link" onclick="window.location.href='../pages/schChoice.html#class'" id="classes">Аудитории</a>
+    </div>
+    <div class="navbar-nav ms-auto right-side">
+      <a class="nav-link"  id="nickname"></a>
+      <a class="nav-link" id="signout">&nbsp;Выйти</a>
+    </div>
+  </nav>
+
+    <div class="container mt-5 bg-white rounded-2 py-2 pe-4">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h1 id="sch-for">Расписание </h1>
+          <h2 id="date-week" class="text-secondary">27 февраля 2023 - 4 марта 2023</h2>
+          <button type="button" class="btn btn-dark my-3 me-3" id="previousWeek">Предыдущая неделя</button>
+          <button type="button" class="btn btn-dark my-3"  id="nextWeek">Слудующая неделя</button>
+        </div>
+        <span class="legend" id="legend" data-toggle="popover" rel="popover" data-bs-custom-class="custom-popover">
+          Что означают цвета?
+        </span>
+      </div>
+      <table id="schedule-table" class="table table-bordered">
+        <thead>
+          <tr>
+            <th style="width: 24px"></th>
+            <th>
+              <p class="h6">ПН</p>
+              <p class="text-secondary h6" id="monday">27 февр.</p>
+            </th>
+            <th>
+              <p class="h6">ВТ</p>
+              <p class="text-secondary h6" id="tuesday">28 февр.</p>
+            </th>
+            <th>
+              <p class="h6">СР</p>
+              <p class="text-secondary h6" id="wednesday">1 мар.</p>
+            </th>
+            <th>
+              <p class="h6">ЧТ</p>
+              <p class="text-secondary h6" id="thursday">2 мар.</p>
+            </th>
+            <th>
+              <p class="h6">ПТ</p>
+              <p class="text-secondary h6" id="friday">3 мар.</p>
+            </th>
+            <th>
+              <p class="h6">СБ</p>
+              <p class="text-secondary h6" id="saturday">4 мар.</p>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>
+              <p class="text-center h6">8:45</p>
+              <p class="text-center text-secondary h6">10:20</p>
+            </th>
+            <td id="c0"></td>
+            <td id="c1"></td>
+            <td id="c2"></td>
+            <td id="c3"></td>
+            <td id="c4"></td>
+            <td id="c5"></td>
+          </tr>
+          <tr>
+            <th>
+              <p class="text-center h6">10:35</p>
+              <p class="text-center text-secondary h6">12:10</p>
+            </th>
+            <td id="c6"></td>
+            <td id="c7"></td>
+            <td id="c8"></td>
+            <td id="c9"></td>
+            <td id="c10"></td>
+            <td id="c11"></td>
+          </tr>
+          <tr>
+            <th>
+              <p class="text-center h6">12:25</p>
+              <p class="text-center text-secondary h6">14:00</p>
+            </th>
+            <td id="c12"></td>
+            <td id="c13"></td>
+            <td id="c14"></td>
+            <td id="c15"></td>
+            <td id="c16"></td>
+            <td id="c17"></td>
+          </tr>
+          <tr>
+            <th>
+              <p class="text-center h6">14:45</p>
+              <p class="text-center text-secondary h6">16:20</p>
+            </th>
+            <td id="c18"></td>
+            <td id="c19"></td>
+            <td id="c20"></td>
+            <td id="c21"></td>
+            <td id="c22"></td>
+            <td id="c23"></td>
+          </tr>
+          <tr>
+            <th>
+              <p class="text-center h6">16:35</p>
+              <p class="text-center text-secondary h6">18:10</p>
+            </th>
+            <td id="c24"></td>
+            <td id="c25"></td>
+            <td id="c26"></td>
+            <td id="c27"></td>
+            <td id="c28"></td>
+            <td id="c29"></td>
+          </tr>
+          <tr>
+            <th>
+              <p class="text-center h6">18:25</p>
+              <p class="text-center text-secondary h6">20:00</p>
+            </th>
+            <td id="c30"></td>
+            <td id="c31"></td>
+            <td id="c32"></td>
+            <td id="c33"></td>
+            <td id="c34"></td>
+            <td id="c35"></td>
+          </tr>
+          <tr>
+            <th>
+              <p class="text-center h6">20:15</p>
+              <p class="text-center text-secondary h6">21:50</p>
+            </th>
+            <td id="c36"></td>
+            <td id="c37"></td>
+            <td id="c38"></td>
+            <td id="c39"></td>
+            <td id="c40"></td>
+            <td id="c41"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="d-none">
+      <div class="popover-body">
+        <div class="tag lecture_bg_color"><span>Лекция</span></div>
+        <div class="tag seminar_bg_color"><span>Семинар</span></div>
+        <div class="tag practical_bg_color"><span>Практическое занятие</span></div>
+        <div class="tag lab_bg_color"><span>Лабораторная</span></div>
+        <div class="tag individual_bg_color"><span>Индивидуальное занятие</span></div>
+        <div class="tag other_bg_color"><span>Иная контактная работа</span></div>
+        <div class="tag control_bg_color"><span>Контрольная работа</span></div>
+        <div class="tag control_bg_color"><span>Экзамен</span></div>
+        <div class="tag control_bg_color"><span>Зачёт</span></div>
+        <div class="tag control_bg_color"><span>Дифф. зачёт</span></div>
+        <div class="tag consultation_bg_color"><span>Консультация</span></div>
+        <div class="tag booking_bg_color"><span>Бронь</span></div>
+      </div>
+    </div>
+
+    <div class="modal fade" data-bs-backdrop="static" id="edit-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Редактирование занятия</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+          </div>
+          <div class="modal-body " >
+            <label id="label-group-edit" class="form-label fw-bold" for="input-subject">Предмет</label>
+            <select class="form-select form-control" disabled id="input-subject-edit"></select>
+
+            <label id="label-teacher-edit" class="form-label fw-bold mt-3" for="input-teacher-id">Имя учителя</label>
+            <select class="form-select form-control" disabled id="input-teacher-id-edit"></select>
+
+            <label id="label-groups-edit" class="form-label fw-bold mt-3" for="input-groups">Группы</label>
+            <select class="form-select form-control" disabled id="input-groups-edit" multiple required></select>
+
+            <label id="label-cabinet-edit" class="form-label fw-bold mt-3" for="input-cabinet">Аудитория</label>
+            <select class="form-select form-control" disabled id="input-cabinet-edit"></select>
+
+            <label id="label-type-edit" class="form-label fw-bold mt-3" for="input-type">Тип занятия</label>
+            <select class="form-select form-control" disabled id="input-type-edit">
+              <option value="LECTURE">LECTURE</option>
+              <option value="SEMINAR">SEMINAR</option>
+              <option value="PRACTICE">PRACTICE</option>
+              <option value="LABWORK">LABWORK</option>
+              <option value="INDIVIDUAL_LESSON">INDIVIDUAL_LESSON</option>
+              <option value="CONTROL_POINT">CONTROL_POINT</option>
+              <option value="CONSULTATION">CONSULTATION</option>
+              <option value="RESERVATION">RESERVATION</option>
+              <option value="OTHER ">OTHER</option>
+            </select>
+
+            <label id="label-timeslot-edit" class="form-label fw-bold mt-3" for="input-type">Время занятия</label>
+            <select class="form-select form-control" disabled id="input-timeslot-edit"></select>
+
+            <label id="label-week-edit" class="form-label fw-bold mt-3" for="input-type">День недели</label>
+            <select class="form-select form-control" disabled id="input-week-edit">
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+            </select>
+
+            <div class="d-flex flex-row">
+              <label id="label-date-start-edit" class="form-label fw-bold my-3 me-3" for="input-date-start">Дата начала</label>
+              <input id="input-date-start-edit" disabled class="form-control my-3 me-5" type="date" required>
+
+              <label id="label-date-end-edit" class="form-label fw-bold my-3 me-3" for="input-date-end">Дата конца</label>
+              <input id="input-date-end-edit" disabled class="form-control my-3" type="date" required>
+            </div>
+            <label id="label-date-cur-edit" class="form-label fw-bold  me-3" for="input-date-end">Дата пары</label>
+            <input id="input-date-cur-edit" disabled class="form-control " type="date" required>
+            <div class="border border-danger rounded text-danger d-none errorr"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" id="edit-single">Редактировать для этой неделе</button>
+            <button type="button" class="btn btn-dark" id="edit-all">Редактировать для каждой неделе</button>
+            <button type="button" class="btn btn-dark  d-none" id="edit-ok-single">Принять изменения</button>
+            <button type="button" class="btn btn-dark  d-none" id="edit-ok-all">Принять изменения</button>
+            <button type="button" class="btn btn-dark bg-danger border-danger  d-none" id="cancel">Отменить</button>
+
+
+            <button type="button" class="btn del-btn" id="del-les-single">Удалить на этой неделе</button>
+            <button type="button" class="btn del-btn" id="del-les-all">Удалить на каждой неделе</button>
+            <div class="border border-danger rounded text-danger d-none error">
+              Вы не можете удалить пару которая уже прошла!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  <script type="module" src="../scripts/shedule.js"></script>
+  <script type="module" src="../scripts/addLesson.js"></script>
+  <script type="module" src="../scripts/editLesson.js"></script>
+  </body>
+</html>

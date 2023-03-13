@@ -1,0 +1,53 @@
+.lecture_bg_color {
+  color: rgb(232, 144, 5);
+  background: rgba(232, 144, 5, 0.2);
+  border: 1px solid rgb(232, 144, 5);
+}
+
+.seminar_bg_color {
+  background: rgba(135, 98, 201, 0.2);
+  color: rgb(135, 98, 201);
+  border: 1px solid rgb(135, 98, 201);
+}
+
+.practical_bg_color {
+  background: rgba(69, 106, 207, 0.4);
+  color: rgb(69, 106, 207);
+  border: 1px solid rgb(69, 106, 207);
+}
+
+.lab_bg_color {
+  background: rgba(77, 157, 179, 0.2);
+  color: rgb(77, 157, 179);
+  border: 1px solid rgb(77, 157, 179);
+}
+
+.individual_bg_color {
+  background: rgba(9, 157, 132, 0.2);
+  color: rgb(9, 157, 132);
+  border: 1px solid rgb(9, 157, 132);
+}
+
+.other_bg_color {
+  background: rgba(152, 143, 42, 0.2);
+  color: rgb(152, 143, 42);
+  border: 1px solid rgb(152, 143, 42);
+}
+
+.control_bg_color {
+  background: rgba(173, 24, 45, 0.2);
+  color: rgb(173, 24, 45);
+  border: 1px solid rgb(173, 24, 45);
+}
+
+.consultation_bg_color {
+  color: rgb(225, 95, 95);
+  background: rgba(225, 95, 95, 0.2);
+  border: 1px solid rgb(225, 95, 95);
+}
+
+.booking_bg_color {
+  color: rgb(124, 122, 122);
+  background: rgba(190, 187, 187, 0.2);
+  border: 1px solid rgb(190, 187, 187);
+}

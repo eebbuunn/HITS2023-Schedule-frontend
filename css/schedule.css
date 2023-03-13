@@ -1,0 +1,71 @@
+tr {
+  height: 10vh;
+}
+
+.lesson-card > h5, .lesson-card > p, .lesson-card > h6 {
+  font-size: 12px;
+}
+
+thead > tr {
+  height: 4vh;
+}
+
+tr > td {
+  width: 20vh;
+}
+
+.legend:hover {
+  cursor: pointer;
+}
+.popover-body {
+  padding: 5px;
+  display: block;
+  margin: 2px;
+}
+.tag {
+  width: max-content;
+  border-radius: 2px;
+  padding: 0px 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  font-weight: 400;
+}
+
+.custom-popover {
+  --bs-popover-border-radius: 4px;
+  --bs-popover-border-width: 1px;
+  --bs-popover-border-color: var(--main-color);
+}
+
+.error {
+  margin: 0px 20px 20px 0px;
+  padding: 10px 10px 10px 10px;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.errorr {
+  margin: 10px 20px 5px 0px;
+  padding: 10px 10px 10px 10px;
+  width: 100%;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+.del-btn {
+  margin: 2px;
+  background: rgba(173, 24, 45, 0.2);
+  color: rgb(173, 24, 45);
+  border: 1px solid rgb(173, 24, 45);
+}
+.del-btn:hover {
+  color: white;
+  background: rgb(173, 24, 45);
+}
+.del-btn:active {
+  background: white !important;
+  color: rgb(173, 24, 45) !important;
+  border: 1px solid rgb(173, 24, 45) !important;
+}
+.del-btn:focus {
+  background: rgba(173, 24, 45, 0.2);
+  color: rgb(173, 24, 45);
+  border: 1px solid rgb(173, 24, 45);
+}

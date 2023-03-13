@@ -1,0 +1,69 @@
+:root {
+  --navbar-bg-color: #003b39;
+  --main-color: #00615d;
+  --btn-hover-color: #01776e;
+}
+body {
+  color: var(--main-color);
+  margin: 0;
+}
+.btn {
+  background-color: var(--main-color);
+}
+
+.btn:hover {
+  background-color: var(--btn-hover-color);
+}
+.btn:active {
+  background: white !important;
+  border: 2px var(--main-color) solid !important;
+  color: var(--main-color) !important;
+}
+
+.navbar {
+  background: var(--navbar-bg-color);
+  padding: 0;
+}
+
+.nav-logo {
+  width: 10vh;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.navbar-brand {
+  font-family: 'Kameron', sans-serif;
+  font-size: 28px;
+  margin: 0px 20px 0px 0px;
+}
+
+.nav-logo {
+  margin: 0px 10px 0px 40px;
+}
+
+.right-side {
+  margin-right: 20px;
+}
+.nav-link {
+  cursor: pointer;
+}
+.del-btn {
+  margin: 2px;
+  background: rgba(173, 24, 45, 0.2);
+  color: rgb(173, 24, 45);
+  border: 1px solid rgb(173, 24, 45);
+}
+.del-btn:hover {
+  color: white;
+  background: rgb(173, 24, 45);
+}
+.del-btn:active {
+  background: white !important;
+  color: rgb(173, 24, 45) !important;
+  border: 1px solid rgb(173, 24, 45) !important;
+}
+.del-btn:focus {
+  background: rgba(173, 24, 45, 0.2);
+  color: rgb(173, 24, 45);
+  border: 1px solid rgb(173, 24, 45);
+}
